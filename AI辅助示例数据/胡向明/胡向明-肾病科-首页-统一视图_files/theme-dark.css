@@ -1,0 +1,119 @@
+/* 颜色变量名字必须以--开头 */
+:root {
+        --navbg-color: linear-gradient(310deg, #0082c6 0%, #0082c6 90%);
+        --app-main-bg: #03A9F4;
+        --bg-color: #ffffff;
+        --indexbg-color: #f0f6ff;
+        --menu-color: #f1f3f4;
+        --font3-color: #333333;
+        --font6-color: #34003d;
+        --font9-color: #999999;
+        --font-white-color: #ffffff;
+        --font-black-color: #000000;
+        --border-color: #3333;
+        --i-icon-color: #2196f3;
+        --sett-color: #6dade8;
+        --sett-border-color: #0040e350;
+        --orgCurrTxt-color: #333333;
+        --logo-bg-image-size: 100% 90%;
+        --table-th-bg-color:#84f1ff;
+        /*--serach-buttom-bg-color:#24bf5b; */
+        --serach-buttom-bg-color: linear-gradient(313deg, rgba(3, 140, 244, 0.968627), rgba(3, 140, 244, 0.968627));
+        --serach-buttom-border-color: #ffffff;
+        --table-head-title-color: #0040e3;
+        --table-row-striped-bg-color: #0cb3ff;
+        --table-td-cell-sp-color: #000c4e;
+        --table-view-icon-bg-color: #3f5cfc80;
+        --table-view-icon-disabled-bg-color: #3f5cfccc;
+        --icon-rase-bg-color: #ffe5e5;
+        --icon-rase-label-color: #e21616;
+        --icon-fall-bg-color: #c7e3ff;
+        --icon-fall-label-color: #0040e3;
+        --icon-p-bg-color: #f07a33;
+        --comp-border-color: #e0e3e980;
+        --box-shadow-color: 1px 3px 5px 1px #00000020;
+        --box-shadow-top-color: 0px 1px 5px 0px #00000020;
+        /*visitInfo.vue */
+        --svg-disabled-icon-color: #bebebe;
+        --svg-add-icon-color: #bebebe;
+        --svg-select-icon-color: #fff;
+        --statcurr-count-color: #558df7;
+        --statnormal-count-color: #0b1d57;
+        --icon-block-normal-bg-color: linear-gradient(134deg, #558df7 6%, #5885ff 95%);
+        --icon-block-curr-bg-color: linear-gradient(134deg,
+                        rgba(255, 255, 255, 0.95) 6%,
+                        rgba(255, 255, 255, 0.62) 95%);
+        --icon-block-curr-border-color: rgba(0, 0, 0, 0);
+        --nav-lst-bg-image: #ffffff;
+        --nav-lst-bg-click-image: url(/image/click.png);
+        --nav-list-bg-color: #13aff6;
+        --liuguang-color: linear-gradient(220.55deg, transparent 0%, transparent 100%);
+        /*visitDeptList.vue */
+        --line--bg-color: #e0e3e9;
+        --bk-bg-color: #003dd9;
+        --bkcurr-bg-color: #fa8f8f;
+        --dashed-border-color: #c4cbd0;
+        --solid-color: #dde7fd99;
+        --info-bg-color: #bcbcbc12;
+        --info-bg-curr-color: #d4f7fc;
+        --svg-color: #ff6700;
+        --vtype-01-color: #1f93f0;
+        --vtype-02-color: #24bfa1;
+        --vtype-03-color: #dd4912;
+        --visit-time-bg-color: #dbeaff;
+        --visit-time-curr-font-color: #ffffff;
+        --visit-time-font-color: #320d00;
+        /*patientInfo.vue */
+        --patient-info-bg-color: #f8fcff;
+        --card-small-bg-color: #37c1ff;
+        --patient-lb-cont: #3F51B5;
+        /*patientList.vue*/
+        --patient-list-serach-bg-color: #f0f6ff;
+        /*visitIndex.vue*/
+        --line-i-color: #0283ea;
+        --sub-tit-bg-color: #32475c;
+        --sub-line-border: #e8f0fe;
+        --table-cust-rows-cell-border-color: #eaeaea;
+        --table-row-head-bg-color: #f3f3f3;
+        --table-row-head-bg-color1: #2196f30f;
+        --table-row-head-font-color: #6006ff;
+        --table-cell-title-color: #121212;
+        --list-title-lab-color: #000000;
+        --sub-tit-font-size: 15px;
+        --cell-head-font-size: 14px;
+        /*pacsReport.vue */
+        --sel-type-shadow: #eceff4c4;
+        --sel-type-line-bg-color: #00bcd4;
+        --item-list-curr-bg: #084d8ecc;
+        --item-list-curr-border: #084d8ecc;
+        /*order.vue*/
+        --shadow-color: #eceff4;
+        --tab-page-title-color:#000;
+        --tab-page-title-font-size:14px;
+        --tab-page-title-color-curr:#9C27B0;
+        /*operate.vue*/
+        /*patientList.vue*/
+        --table-pagination-pager-bg-color: #0040e3;
+        /*checkBoxLists.vue*/
+        --checkbox-bg-color: #FF5EEF80;
+        --checkbox-checked-bg-color: linear-gradient(0deg, #FF5EEF 0%, #456EFF 100%);
+        ;
+        --category-exam-tab-color: #;
+        --category-exam-tab-bg-color: #24bf5b;
+        --category-exam-header-span-bg-color: #ebf2ff;
+        --category-exam-header-span-color: #0040e3;
+
+        --category-patient-info-name-color: #0040e3;
+        --category-check-tab-line-bg: linear-gradient(90deg, #24bf5b, #24bf5b);
+
+        --item-list-curr-bg-color: #0040e3;
+        --item-list-curr-color: #0040e3;
+
+        --maindaig-li-border-left: #0040e3;
+        --maindaig-li-border-top: #0040e3;
+        --serach-buttom-bg: linear-gradient(313deg, #038cf4, #038cf4);
+        /**timeAxis.vue */
+        --date-block-bg-color: linear-gradient(270.55deg,
+                        rgba(3, 140, 244, 0.5019607843137255),
+                        rgba(3, 140, 244, 0.5019607843137255));
+}

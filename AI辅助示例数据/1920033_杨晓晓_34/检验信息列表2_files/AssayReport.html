@@ -1,0 +1,649 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0136)http://172.17.10.230:8005/DoctorOutP/AssayReport.aspx?orgCode=D59C2E61C533B09E49B7835977FF3035&reportNo=4FA69A91592CDCF61932DB86D9B5655B -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+	化验报告单
+</title><link href="./NBMain.css" rel="stylesheet" type="text/css">
+    <script src="./jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="./jquery-comm.js" type="text/javascript"></script>
+    <script src="./jquery.validate.js" type="text/javascript"></script>
+    <script src="./ymPrompt.js" type="text/javascript"></script>
+    <style>
+        .btnfix {
+            position: fixed;
+            top: 40%;
+            right: 15%;
+            z-index:99;
+        }
+    </style>
+    <script type="text/javascript">
+        function preview(oper) {
+            if (oper < 10) {
+                bdhtml = window.document.body.innerHTML;//获取当前页的html代码
+                sprnstr = "<!--startprint" + oper + "-->";//设置打印开始区域
+                eprnstr = "<!--endprint" + oper + "-->";//设置打印结束区域
+                prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 18); //从开始代码向后取html
+
+                prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));//从结束代码向前取html
+                window.document.body.innerHTML = prnhtml;
+                window.print();
+                window.document.body.innerHTML = bdhtml;
+            } else {
+                window.print();
+            }
+
+        }
+    </script>
+</head>
+<body>
+<input id="TextBox1" value="4717718500" style="display:none">
+<input id="TextBox2" value="20250517NLS070" style="display:none">
+<input id="TextBox3" value="" style="display:none">
+<input id="TextBox4" value="" style="display:none">
+    <form name="form1" method="post" action="http://172.17.10.230:8005/DoctorOutP/AssayReport.aspx?orgCode=D59C2E61C533B09E49B7835977FF3035&amp;reportNo=4FA69A91592CDCF61932DB86D9B5655B" id="form1">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<div>
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWDALmjuu3AwKUgp3NBgLbwrWYBQLdwvGcCwLClZCPDwLux6nhCwK1xpHRDQLmr5miBQL36fK/AwLer5nHBgKO2+/PCAKPqrrsCchdtyL9rVlqAANcVwoF/hSt5UPa">
+</div>
+        <div style="width: 890px; margin: 0px auto;" id="myPrintArea">
+            <div style="width: 880px;">
+                <a href="http://172.17.10.230:8005/Home/MyHealthInfo.aspx?reload=1" style="display:none; float: right">
+                    <img src="./user-card.png" style="width: 30px; height: 30px" alt="首页"></a>
+            </div>
+            <div class="btnfix">
+                <img src="./shareinfo.png" style="width: 70px; height: 70px;display:none;" alt="共享互认" id="ShareInfoBtn">
+            </div>
+            <div style="margin-top: 10px;"><span style="font-size: 20px;">化验报告单</span></div>
+            <div class="alicegray_bar" style="margin-top: 5px;" id="EvtBox">
+                <!--startprint1-->
+                <div class="head">
+                    <div class="left">
+                    </div>
+                    <div>
+                        <span class="f_c264F79_s16_wb" style="width: 846px;">基本信息</span><a class="icon_down" href="javascript:void(0);">&nbsp;</a>
+                    </div>
+                    <div class="right">
+                    </div>
+                </div>
+                <div class="content">
+                    <table cellspacing="6" style="width: 100%">
+                        <tbody><tr>
+                            <td align="left" style="width: 33%">
+                                <div class="block_Text">
+                                    姓名:<input name="lblName" type="text" value="杨勇" readonly="readonly" id="lblName" class="TextBox" style="width: 160px">
+                                </div>
+                            </td>
+                            <td align="left" style="width: 33%">
+                                <div class="block_Text">
+                                    性别:<input name="lblSex" type="text" value="男" readonly="readonly" id="lblSex" class="TextBox" style="width: 160px">
+                                </div>
+                            </td>
+                            <td align="left" style="width: 33%">
+                                <div class="block_Text">
+                                    年龄:<input name="lblAge" type="text" value="30" readonly="readonly" id="lblAge" class="TextBox" style="width: 160px">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="width: 33%">
+                                <div class="block_Text">
+                                    病人类型:<input name="lblPatientType" type="text" value="门诊" readonly="readonly" id="lblPatientType" class="TextBox" style="width: 160px">
+                                </div>
+                            </td>
+                            <td align="left" style="width: 33%">
+                                <div class="block_Text">
+                                    科室:<input name="lblDeptName" type="text" value="肾内科专家门诊" readonly="readonly" id="lblDeptName" class="TextBox" style="width: 160px">
+                                </div>
+                            </td>
+                            <td align="left" style="width: 33%">
+                                <div class="block_Text">
+                                    门诊号:<input name="lblPatientCode" type="text" value="2025051741885286" readonly="readonly" id="lblPatientCode" class="TextBox" style="width: 160px">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="width: 33%">
+                                <div class="block_Text">
+                                    临床诊断:<input name="lblDiag" type="text" value="肾功能不全" readonly="readonly" id="lblDiag" class="TextBox" style="width: 160px">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </div>
+            </div>
+            <div class="alicegray_bar" style="margin-top: 5px;" id="EvtBox">
+                <div class="head">
+                    <div class="left">
+                    </div>
+                    <div>
+                        <span class="f_c264F79_s16_wb" style="width: 846px;">化验信息</span><a class="icon_down" href="javascript:void(0);">&nbsp;</a>
+                    </div>
+                    <div class="right">
+                    </div>
+                </div>
+                <div class="content">
+                    <table cellspacing="6" style="width: 100%" class="tablebluetitle1">
+                        <tbody><tr>
+                            <td colspan="8">
+                                <table id="dlAssayItem" cellspacing="0" cellpadding="0" border="0" style="border-width:0px;width:100%;border-collapse:collapse;margin-top: 5px;">
+	<tbody><tr>
+		<td>
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="0">
+                                            <tbody><tr>
+                                                <td style="width: 50%">
+                                                    <table style="width: 100%" border="0" cellspacing="1" cellpadding="0" width="100%; ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width: 40%" class="left">
+                                                                    <div>项目名称</div>
+                                                                </th>
+                                                                <th style="width: 15%" align="center">
+                                                                    <div>结果</div>
+                                                                </th>
+                                                                <th style="width: 45%" class="center">
+                                                                    <div>参考值</div>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </td>
+                                                
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     颜色COL
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>稻黄色</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     浊度
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>透明</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    阴性&nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     红细胞变形率
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>-</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     胆红素BIL
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>-</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     尿隐血BLD
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    1+<font color="red">↑</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     葡萄糖GLU
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>-</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     酮体KET
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>-</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     白细胞脂酶LEU
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>-</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     亚硝酸盐NIT
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>-</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     酸碱度pH
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>5.5</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    4.5-8.0&nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     蛋白质PRO
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>+-</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     尿胆原URO
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>-</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     尿比重SG
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>1.010</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    1.003-1.030&nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     沉渣中细菌细菌
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>0</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    0-400&nbsp;个/μl
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     沉渣中管型管型
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>0</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    0-2&nbsp;个/μl
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     沉渣中上皮细胞上皮细胞
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>1</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    0-6&nbsp;个/μl
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     沉渣中粘液粘液丝
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>-</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp; /μl
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     沉渣中病理管型病理管型
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>0</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    0-0&nbsp;个/μl
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     沉渣中红细胞红细胞
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>8</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    0-17&nbsp;个/μl
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     红细胞信息RBC-Info
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>正常</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     沉渣中小圆细胞小圆上皮细胞
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>1</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    0-3&nbsp;个/μl
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     沉渣中白细胞白细胞
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>3</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    0-28&nbsp;个/μl
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     沉渣中结晶结晶
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>-</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp;个/μl
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr><tr>
+		<td style="width:50%;">
+                                        <table style="width: 100%" border="0" cellpadding="0" cellspacing="1">
+                                            <tbody><tr>
+                                                <td style="width: 40%" align="left" height="20">
+                                                     沉渣中类酵母菌酶母菌
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <font>-</font>
+                                                </td>
+                                                <td style="width: 45%" align="center">
+                                                    &nbsp;个/μl
+                                                </td>
+                                            </tr>
+                                        </tbody></table>
+                                    </td>
+	</tr>
+</tbody></table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="width: 25%">
+                                <div class="block_Text">
+                                    检查医生:<input name="lblSendDoc" type="text" readonly="readonly" id="lblSendDoc" class="TextBox" style="width: 90px">
+                                </div>
+                            </td>
+                            <td align="left" style="width: 25%">
+                                <div class="block_Text">
+                                    检查日期:<input name="lblSendDate" type="text" value="2025-05-17" readonly="readonly" id="lblSendDate" class="TextBox" style="width: 90px">
+                                </div>
+                            </td>
+                            <td align="left" style="width: 25%">
+                                <div class="block_Text">
+                                    核 对 者:<input name="lblAuditDoc" type="text" value="黄涵琪" readonly="readonly" id="lblAuditDoc" class="TextBox" style="width: 90px">
+                                </div>
+                            </td>
+                            <td align="left" style="width: 25%">
+                                <div class="block_Text">
+                                    核对日期:<input name="lblAuditDate" type="text" value="2025-05-17" readonly="readonly" id="lblAuditDate" class="TextBox" style="width: 90px">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                    <!--endprint1-->
+
+                    <div style="margin-top: 10px;">
+                        <table style="width: 770" border="0" cellpadding="0" cellspacing="0" align="center">
+                            <tbody><tr>
+                                <td height="27" align="left" colspan="2">
+                                    <div align="left">
+                                        网上化验单数据仅供参考，以医院打印的检验单结果为准！(提示说明:<font color="red">↑</font>偏高低危<font color="red"> ▲</font>偏高高危
+                        <font color="red">↓</font>偏低低危 <font color="red">▼</font>偏低高危)
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="27" align="left" colspan="2">
+                                    <div align="left">
+                                        <input type="button" name="button_show" value="打印预览" class="noprint" onclick="javascript: preview(1);">
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                        </tbody></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".icon_down,.icon_up").bind("click", function () {
+            var obj = $(this);
+            if (obj.attr("className") == "icon_down") { obj.attr("className", "icon_up"); $(".content", $(".alicegray_bar").has(obj)).hide(); }
+            else { obj.attr("className", "icon_down"); $(".content", $(".alicegray_bar").has(obj)).show(); }
+        });
+        $("#ShareInfoBtn").click(function () {
+            var orgcode = document.getElementById("TextBox1").value;
+            var cid = document.getElementById("TextBox2").value;
+            var empcode = document.getElementById("TextBox3").value;
+            var empname = document.getElementById("TextBox4").value;
+            $(this).huAjax({
+                url: "../Haddle/ShareInfo_Assay.ashx",
+                data: { Action: "ShareInfo_Assay", orgcode: orgcode, cid: cid, empcode: empcode, empname: empname },
+                error: function (v) {
+
+                }
+                 , success: function (data, textStatus) {
+                     if (data.Tag == $.AjaxResultTag.Success) {
+                         alert("检验数据共享成功！");
+                     }
+                 }
+            }
+            );
+
+
+            //$.ajax({
+            //    type: "Post",//要用post方式   
+            //    url: "../Haddle/ShareInfo_Assay.ashx",//方法所在页面和方法名   
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    data: { Action: "ShareInfo_Assay", aaa: '111' },//aaa是方法show()的入参   
+            //    success: function (data) {
+            //        alert(data.d);//返回的数据用data.d获取内容   
+            //    },
+            //    error: function (err) {
+            //        alert(err);
+            //    }
+            //});
+
+        });
+
+
+        var mc = $("#mytable1 tbody");
+        if (mc.length > 0) mergeCell(mc[0], 0);
+        mc = $("#mytable2 tbody");
+        if (mc.length > 0) mergeCell(mc[0], 0);
+        mc = $("#mytable3 tbody");
+        if (mc.length > 0) mergeCell(mc[0], 0);
+    });
+</script>
+<div><div id="maskLevel" style="position:absolute;top:0;left:0;display:none;text-align:center;z-index:10000;"></div><div id="ym-window" style="position:absolute;z-index:10001;display:none"><div class="ym-tl" id="ym-tl"><div class="ym-tr"><div class="ym-tc" style="cursor:move;"><div class="ym-header-text"></div><div class="ym-header-tools"><div class="ymPrompt_min" title="最小化"><strong>0</strong></div><div class="ymPrompt_max" title="最大化"><strong>1</strong></div><div class="ymPrompt_close" title="关闭"><strong>r</strong></div></div></div></div></div><div class="ym-ml" id="ym-ml"><div class="ym-mr"><div class="ym-mc"><div class="ym-body" style="position:relative"></div></div></div></div><div class="ym-ml" id="ym-btnl"><div class="ym-mr"><div class="ym-btn"></div></div></div><div class="ym-bl" id="ym-bl"><div class="ym-br"><div class="ym-bc"></div></div></div></div></div></body></html>

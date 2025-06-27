@@ -1,0 +1,1 @@
+var g_url = "http://172.17.10.118:5006/api/IpdFirst/IpdFirstInput";

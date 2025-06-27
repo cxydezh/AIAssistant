@@ -1,0 +1,1284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0064)http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=3 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+	检验信息列表
+</title><link id="ctl00_ctl00_skinMain" href="./检验信息列表1_files/NBMain.css" rel="stylesheet" name=""><link id="ctl00_ctl00_ymPromptCss" href="./检验信息列表1_files/ymPrompt.css" rel="stylesheet" type="text/css">
+    <script src="./检验信息列表1_files/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="./检验信息列表1_files/jquery-comm.js" type="text/javascript"></script>
+    <script src="./检验信息列表1_files/ymPrompt.js" type="text/javascript"></script>
+    <script type="text/javascript">  var SetCurrentTopMenu = undefined;</script>
+    
+
+    <script src="./检验信息列表1_files/FusionCharts.js" type="text/javascript"></script>
+         <script src="./检验信息列表1_files/echarts.min.js" type="text/javascript"></script>
+    
+
+    <script type="text/javascript">
+        $(function () {
+            $(this).huAjax({
+                url: "../Haddle/Person_Get.ashx", data: { Action: "Person_Get" }
+                , error: function (v) {
+                }
+                , success: function (data, textStatus) {
+                    if (data.Tag == $.AjaxResultTag.Success) {
+                        $("#PersionInfo").SetValue(data.Value[0]);
+                    };
+                }
+            });
+
+            if ($("#pnlHt").css("display") == "block") {
+                $(this).huAjax({
+                    url: "../Haddle/Person_Ht_Visit_Last.ashx", data: { Action: "Person_Ht_Visit_Last" }
+                , error: function (v) {
+                }
+                , success: function (data, textStatus) {
+                    if (data.Tag == $.AjaxResultTag.Success) {
+                        if (data.Value == undefined || data.Value.length == 0) {
+                            $("#PersonHtVisit").hide(); $("#chartdivHt").css("line-height", "30px").html("您暂无随访信息").css("width", "100%").css("color", "red"); return;
+                        }
+                        var obj = data.Value[0];
+                        if (obj == undefined) return;
+                        $("#PersonHtVisit").SetValue(obj);
+                        var SPB = obj.SPB || 0;
+                        var DPB = obj.DPB || 0;
+                        var lowerLimit = 0;
+                        var upperLimit = 0;
+                        var colorRangs = "";
+                        var value = 0;
+                        var caption = "";
+
+                        if (SPB > DPB) {
+                            value = SPB;
+                            upperLimit = "270";
+                            line1 = "139";
+                            line2 = "159";
+                            line3 = "179";
+                            caption = "收缩压";
+                            colorRangs = "<colorRange><color minValue='0' maxValue='120' code='09CF45' /><color minValue='120' maxValue='130' code='069931'/><color minValue='130' maxValue='140' code='5F9A06'/><color minValue='140' maxValue='160' code='FFFF00'/><color minValue='160' maxValue='180' code='00FF00'/><color minValue='180' maxValue='270' code='FF0000'/></colorRange>";
+                        }
+                        else {
+                            value = DPB;
+                            upperLimit = 230;
+                            line1 = "89";
+                            line2 = "99";
+                            line3 = "109";
+                            caption = "舒张压";
+                            colorRangs = "<colorRange><color minValue='0' maxValue='80' code='09CF45'/><color minValue='80' maxValue='85' code='069931'/><color minValue='85' maxValue='90' code='5F9A06'/><color minValue='90' maxValue='100' code='FFFF00'/><color minValue='100' maxValue='110' code='00FF00'/><color minValue='110' maxValue='270' code='FF0000'/></colorRange>";
+                        }
+                        var chartDom = document.getElementById('echarts');
+                        var myChart = echarts.init(chartDom);
+                        var option;
+                        option = {
+                            series: [
+                                {
+                                    type: 'gauge',
+                                    startAngle: 180,
+                                    endAngle: 0,
+                                    min: 0,
+                                    max: 270,
+                                    splitNumber: 9,
+                                    axisLine: {
+                                        lineStyle: {
+                                            width: 10,
+                                            color: [
+                                                [line1 / 270, '#09CF45'],
+                                                [line2 / 270, '#069931'],
+                                                [line3 / 270, '#FFFF00'],
+                                                [1, '#FF0000']
+
+                                            ]
+                                        }
+                                    },
+                                    pointer: {
+                                        icon: 'path://M2090.36389,615.30999 L2090.36389,615.30999 C2091.48372,615.30999 2092.40383,616.194028 2092.44859,617.312956 L2096.90698,728.755929 C2097.05155,732.369577 2094.2393,735.416212 2090.62566,735.56078 C2090.53845,735.564269 2090.45117,735.566014 2090.36389,735.566014 L2090.36389,735.566014 C2086.74736,735.566014 2083.81557,732.63423 2083.81557,729.017692 C2083.81557,728.930412 2083.81732,728.84314 2083.82081,728.755929 L2088.2792,617.312956 C2088.32396,616.194028 2089.24407,615.30999 2090.36389,615.30999 Z',
+                                        length: '75%',
+                                        width: 2,
+                                        offsetCenter: [0, '-5%'],
+                                        itemStyle: {
+                                            color: 'auto'
+                                        }
+                                    },
+                                    axisTick: {
+                                        length: 0,
+                                        lineStyle: {
+                                            color: 'auto',
+                                            width: 2
+                                        }
+                                    },
+                                    splitLine: {
+                                        length: 0,
+                                        lineStyle: {
+                                            color: 'auto',
+                                            width: 5
+                                        }
+                                    },
+                                    detail: {
+                                        fontSize: 0
+                                    },
+                                    axisLabel: {
+                                        color: '#464646',
+                                        fontSize: 10,
+                                        distance: -34,
+                                        formatter: function (value) {
+                                            if (value === 0) {
+                                                return '正常';
+                                            }
+                                            else if (value === 270) {
+                                                return '严重';
+                                            }
+                                            return value;
+                                        }
+                                    },
+                                    data: [
+                                        {
+                                            value: value
+                                        }
+                                    ]
+                                }
+                            ]
+                        };
+                        option && myChart.setOption(option);
+
+                        //if (SPB > DPB) {
+                        //    value = SPB;
+                        //    upperLimit = "270";
+                        //    caption = "收缩压";
+                        //    colorRangs = "<colorRange><color minValue='0' maxValue='120' code='09CF45' /><color minValue='120' maxValue='130' code='069931'/><color minValue='130' maxValue='140' code='5F9A06'/><color minValue='140' maxValue='160' code='FFFF00'/><color minValue='160' maxValue='180' code='00FF00'/><color minValue='180' maxValue='270' code='FF0000'/></colorRange>";
+                        //}
+                        //else {
+                        //    value = DPB;
+                        //    upperLimit = 230;
+                        //    caption = "舒张压";
+                        //    colorRangs = "<colorRange><color minValue='0' maxValue='80' code='09CF45'/><color minValue='80' maxValue='85' code='069931'/><color minValue='85' maxValue='90' code='5F9A06'/><color minValue='90' maxValue='100' code='FFFF00'/><color minValue='100' maxValue='110' code='00FF00'/><color minValue='110' maxValue='270' code='FF0000'/></colorRange>";
+                        //}
+                        //var myChart = new FusionCharts("../Resources/Fusion/FusionWidgets/Charts/AngularGauge.swf", "myChartId", "185", "100", "0", "0");
+                        //myChart.setDataXML("<Chart bgColor='AEC0CA,FFFFFF' caption='" + caption + "' upperLimitDisplay='严重' lowerLimitDisplay='正常' fillAngle='45' upperLimit='" + upperLimit + "' lowerLimit='"
+                        //    + lowerLimit + "' majorTMNumber='10' majorTMHeight='8' showGaugeBorder='0' gaugeOuterRadius='70' gaugeOriginX='92' gaugeOriginY='88' gaugeInnerRadius='1' formatNumberScale='1' displayValueDistance='10' decimalPrecision='2' majorTMThickness='2' tickMarkDecimalPrecision='1' pivotRadius='7' showPivotBorder='1' pivotBorderColor='000000' pivotBorderThickness='1' pivotFillMix='FFFFFF,000000'>"
+                        //    + colorRangs + "<dials><dial value='"
+                        //    + value + "' borderAlpha='0' bgColor='000000' baseWidth='6' topWidth='1' radius='70'/></dials></Chart>");
+                        //myChart.render("chartdivHt");
+
+
+
+                    };
+                }
+                });
+            }
+            if ($("#pnlDm").css("display") == "block") {
+                $(this).huAjax({
+                    url: "../Haddle/Person_Dm_Visit_Last.ashx", data: { Action: "Person_Dm_Visit_Last" }
+                , error: function (v) {
+                }
+                , success: function (data, textStatus) {
+                    if (data.Tag == $.AjaxResultTag.Success) {
+                        if (data.Value == undefined || data.Value.length == 0) {
+                            $("#PersonDmVisit").hide(); $("#chartdivDm").css("line-height", "30px").html("您暂无随访信息").css("width", "100%").css("color", "red"); return;
+                        }
+                        var obj = data.Value[0];
+                        if (obj == undefined) return;
+                        $("#PersonDmVisit").SetValue(obj);
+                        var FBG = obj.FBG || 0;
+                        var PBG = obj.PBG || 0;
+                        var lowerLimit = 0;
+                        var upperLimit = 0;
+                        var colorRangs = "";
+                        var value = 0;
+                        var caption = "";
+
+                        if (FBG > 0) {
+                            value = FBG;
+                            upperLimit = 20;
+                            caption = "空腹血糖";
+                            line1 = "6.1";
+                            line2 = "7";
+                            colorRangs = "<colorRange><color minValue='0' maxValue='6.1' code='069931' /><color minValue='6.1' maxValue='7' code='FF0000'/><color minValue='7' maxValue='20' code='FF0000'/></colorRange>";
+                        }
+                        else {
+                            value = PBG;
+                            upperLimit = 30;
+                            line1 = "7.8";
+                            line2 = "11.1";
+                            caption = "餐后血糖";
+                            colorRangs = "<colorRange><color minValue='0' maxValue='7.8' code='069931' /><color minValue='7.8' maxValue='11.1' code='FF0000'/><color minValue='11.1' maxValue='20' code='FF0000'/></colorRange>";
+                        }
+                        var chartDom = document.getElementById('chartdivDm');
+                        var myChart = echarts.init(chartDom);
+                        var option;
+                        option = {
+                            series: [
+                                {
+                                    type: 'gauge',
+                                    startAngle: 180,
+                                    endAngle: 0,
+                                    min: 0,
+                                    max: 20,
+                                    splitNumber: 10,
+                                    axisLine: {
+                                        lineStyle: {
+                                            width: 10,
+                                            color: [
+                                                [line1 / 20, '#069931'],
+                                                [line2 / 20, '#FFFF00'],
+                                                [1, '#FF0000']
+
+                                            ]
+                                        }
+                                    },
+                                    pointer: {
+                                        icon: 'path://M2090.36389,615.30999 L2090.36389,615.30999 C2091.48372,615.30999 2092.40383,616.194028 2092.44859,617.312956 L2096.90698,728.755929 C2097.05155,732.369577 2094.2393,735.416212 2090.62566,735.56078 C2090.53845,735.564269 2090.45117,735.566014 2090.36389,735.566014 L2090.36389,735.566014 C2086.74736,735.566014 2083.81557,732.63423 2083.81557,729.017692 C2083.81557,728.930412 2083.81732,728.84314 2083.82081,728.755929 L2088.2792,617.312956 C2088.32396,616.194028 2089.24407,615.30999 2090.36389,615.30999 Z',
+                                        length: '75%',
+                                        width: 2,
+                                        offsetCenter: [0, '-5%'],
+                                        itemStyle: {
+                                            color: 'auto'
+                                        }
+                                    },
+                                    axisTick: {
+                                        length: 0,
+                                        lineStyle: {
+                                            color: 'auto',
+                                            width: 2
+                                        }
+                                    },
+                                    splitLine: {
+                                        length: 0,
+                                        lineStyle: {
+                                            color: 'auto',
+                                            width: 5
+                                        }
+                                    },
+                                    detail: {
+                                        fontSize: 0
+                                    },
+                                    axisLabel: {
+                                        color: '#464646',
+                                        fontSize: 10,
+                                        distance: -34,
+                                        formatter: function (value) {
+                                            if (value === 0) {
+                                                return '正常';
+                                            }
+                                            else if (value === 20) {
+                                                return '严重';
+                                            }
+                                            return value;
+                                        }
+                                    },
+                                    data: [
+                                        {
+                                            value: value
+                                        }
+                                    ]
+                                }
+                            ]
+                        };
+                        // console.log("看看进来了么")
+                        option && myChart.setOption(option);
+
+                        //if (FBG > 0) {
+                        //    value = FBG;
+                        //    upperLimit = 20;
+                        //    caption = "空腹血糖";
+                        //    colorRangs = "<colorRange><color minValue='0' maxValue='6.1' code='069931' /><color minValue='6.1' maxValue='7' code='FF0000'/><color minValue='7' maxValue='20' code='FF0000'/></colorRange>";
+                        //}
+                        //else {
+                        //    value = PBG;
+                        //    upperLimit = 30;
+                        //    caption = "餐后血糖";
+                        //    colorRangs = "<colorRange><color minValue='0' maxValue='7.8' code='069931' /><color minValue='7.8' maxValue='11.1' code='FF0000'/><color minValue='11.1' maxValue='20' code='FF0000'/></colorRange>";
+                        //}
+                        //var myChart = new FusionCharts("../Resources/Fusion/FusionWidgets/Charts/AngularGauge.swf", "myChartId", "185", "100", "0", "0");
+                        //myChart.setDataXML("<Chart bgColor='AEC0CA,FFFFFF' caption='" + caption + "' upperLimitDisplay='严重' lowerLimitDisplay='正常' fillAngle='45' upperLimit='" + upperLimit + "' lowerLimit='"
+                        //    + lowerLimit + "' majorTMNumber='10' majorTMHeight='8' showGaugeBorder='0' gaugeOuterRadius='70' gaugeOriginX='92' gaugeOriginY='88' gaugeInnerRadius='1' formatNumberScale='1' displayValueDistance='10' decimalPrecision='2' majorTMThickness='2' tickMarkDecimalPrecision='1' pivotRadius='7' showPivotBorder='1' pivotBorderColor='000000' pivotBorderThickness='1' pivotFillMix='FFFFFF,000000'>"
+                        //    + colorRangs + "<dials><dial value='"
+                        //    + value + "' borderAlpha='0' bgColor='000000' baseWidth='6' topWidth='1' radius='70'/></dials></Chart>");
+
+                        //myChart.render("chartdivDm");
+
+                    };
+                }
+                });
+            }
+            $(this).huAjax({
+                url: "../Haddle/Person_Cva_Visit_Last.ashx", data: { Action: "Person_Cva_Visit_Last" }
+                , error: function (v) {
+                }
+                , success: function (data, textStatus) {
+                    if (data.Tag == $.AjaxResultTag.Success) {
+                        if (data.Value == undefined || data.Value.length == 0) {
+
+                            $("#PersonTumorVisit").hide(); $("#chartdivTumor").css("line-height", "30px").html("您暂无随访信息").css("width", "100%").css("color", "red"); return;
+                        }
+                        var obj = data.Value[0];
+                        $("#PersonCvaVisit").SetValue(obj);
+                    };
+                }
+            });
+            $(this).huAjax({
+                url: "../Haddle/Person_Tumor_Visit_Last.ashx", data: { Action: "Person_Tumor_Visit_Last" }
+                , error: function (v) {
+                }
+                , success: function (data, textStatus) {
+                    if (data.Tag == $.AjaxResultTag.Success) {
+                        var obj = data.Value[0];
+                        if (data.Value == undefined || data.Value.length == 0) {
+                            $("#PersonCvaVisit").hide(); $("#chartdivCva").css("line-height", "30px").html("您暂无随访信息").css("width", "100%").css("color", "red"); return;
+                        }
+                        $("#PersonTumorVisit").SetValue(obj);
+                    };
+                }
+            });
+            $("a[winurl]").Win({ width: 920, height: 500 });
+        });
+        $(document).ready(function () {
+            $(":text", $(".block_Text")).Alt();
+            $(".block_Text :text", $("iframe").GetIFrame()).Alt($("iframe").position());
+            $("iframe").bind("load", function () {
+                $(".Contentbox").CloseLoading();
+            });
+            var MenuBoxUlLi = $(".Menubox div[id^='menu'] a");
+            MenuBoxUlLi.bind("click", function () { 
+                $(".Contentbox").ShowLoading("正在加载数据...");
+                MenuBoxUlLi.parent().attr("className", "");
+                $(this).parent().attr("className", "hover");
+                //alert($(this).attr("href"))
+                //解决火狐、IE9使用iframe加载
+                var contentboxiframe = $(".Contentbox iframe");
+                if (contentboxiframe.length > 0) {
+                    contentboxiframe[0].onload = function () { SetCwinHeight(this); };
+                    //contentboxiframe[0].onload = function() { SetCwinHeight(this); };
+                }
+            });
+            //$("#lblCreate").click(function() {
+            //    var obj = $("#iframezip");
+            //    if (obj.length == 0) obj = $("<iframe src='' style='display:none;'></iframe>");
+            //    $("body").append(obj);
+            //    obj.attr("src", "../DownloadZip.aspx?a=" + Math.random());
+            //    showprocess();
+            //});
+
+            $("a[name='loginOut']").click(function () {
+                $(this).huAjax({
+                    url: "../Haddle/Users.ashx", data: { Action: "Users_LoginOut" }
+                    , error: function (v) {
+                    }
+                    , success: function (data, textStatus) {
+                        if (data.Tag == $.AjaxResultTag.Success) {
+                            location.href = data.Value;
+                        }
+                    }
+                });
+            });
+        });
+        var SetCwinHeightTimes;
+        function SetCwinHeight(obj) {
+            var iframeid = $(obj);
+            if (iframeid.length == 0) iframeid = $(".Contentbox iframe");
+            if (document.getElementById && iframeid.length > 0) {
+                if (!window.opera) {
+                    var r = true;
+                    //alert(iframeid[0].contentDocument.body.innerHTML);
+                    if (iframeid[0].contentDocument) {
+
+                        //if (iframeid[0].contentDocument.body.offsetHeight > 0) {
+                        //    iframeid.css("height", iframeid[0].contentDocument.body.offsetHeight);
+                        //    iframeid.attr("height", iframeid[0].contentDocument.body.offsetHeight);
+                        //    r = false;
+                        //    var postion = $("iframe").position();
+                        //    $(".block_Text :text", $("iframe").GetIFrame()).Alt(postion);
+                        //    $(".Contentbox").CloseLoading();
+                        //    $("a[winurl]", $("iframe").GetIFrame()).Win({ width: 900, height: 500 });
+                        //}
+
+                        //2020-10-20 备份
+                        var h = Math.max(iframeid[0].contentDocument.body.offsetHeight, iframeid[0].contentDocument.body.clientHeight);
+                        if (h > 0) {
+                            r = false;
+                            iframeid.css("height", h);
+                            iframeid.attr("height", h);
+                            var postion = $("iframe").position();
+                            $(".block_Text :text", $("iframe").GetIFrame()).Alt(postion);
+
+                            $(".Contentbox").CloseLoading(); 
+                            
+                            $("a[winurl]", $("iframe").GetIFrame()).Win({ width: 900, height: 500 });
+                        }
+
+
+                        //if (iframeid[0].contentDocument) {//火狐
+                        //    if (iframeid[0].contentDocument.body.offsetHeight > 0) {
+                        //        iframeid.css("height", iframeid[0].contentDocument.body.offsetHeight);
+                        //        iframeid.attr("height", iframeid[0].contentDocument.body.offsetHeight);
+                        //        r = false;
+                        //        var postion = $("iframe").position();
+                        //        $(".block_Text :text", $("iframe").GetIFrame()).Alt(postion);
+                        //    }
+                        //    $(".Contentbox").CloseLoading();
+                        //    $("a[winurl]", $("iframe").GetIFrame()).Win({ width: 900, height: 500 });
+
+                        //}
+                    }
+                    else if (iframeid[0].Document != undefined && iframeid[0].Document.body.scrollHeight) {
+                        r = false;
+                        iframeid.css("height", iframeid[0].Document.body.scrollHeight);
+                        iframeid.css("height", iframeid[0].Document.body.scrollHeight);
+                        $(".block_Text :text", $("iframe").GetIFrame()).Alt($("iframe").position());
+                        $(".Contentbox").CloseLoading();
+                        $("a[winurl]", $("iframe").GetIFrame()).Win({ width: 900, height: 500 });
+                    };
+                    if (r) { SetCwinHeightTimes = setTimeout("SetCwinHeight()", 500); }
+                    else { SetCwinHeightTimes = window.clearTimeout(SetCwinHeightTimes); }
+                }
+            }
+        }
+        //function showprocess() {
+        //    $(this).huAjax({ url: "../Haddle/PersonDocHtml.ashx", data: { Action: "HtmlDoc_Process" }
+        //            , error: function(v) { }
+        //            , success: function(data, textStatus) {
+        //                if (data.Tag == $.AjaxResultTag.Success) {
+        //                    $.ShowProcess(data.Value.Value, data.Value.Message);
+        //                    if (data.Value.Value < 100) setTimeout("showprocess()", 1000);
+        //                };
+        //            }
+        //    });
+        //}
+    </script>
+
+    
+
+</head>
+<body style="">
+    
+        
+
+<div class="bigDIV tophead">
+ <div class="topic"><a href="javascript:void(0)" onclick="addBookmark(&#39;义乌居民健康档案浏览器&#39;,&#39;http://192.168.75.82:8188/&#39;)">加入收藏</a><a href="http://172.17.10.230:8005/home/MyHealthInfo.aspx">查看首页</a><a href="http://172.17.10.230:8005/home/AlterUserInfo.aspx" style="display:none">修改密码</a><a href="javascript:void(0)" id="lbtOut" name="loginOut" style="display:none">退出系统</a></div>
+</div>
+<!--头部主菜单   开始-->
+ <div class="bigDIV topmenu" id="topmenu" style="display:none;">  
+    <div style="width:110px;" class="button" onclick="javascript:location.href=&#39;../Home/Index.aspx&#39;;"></div>
+    <div style="width:8px;"></div>
+    <div style="width: 165px;" class="button" onclick="javascript:location.href=&#39;../Home/MyHealthInfo.aspx&#39;;"></div>
+    <div style="width:8px;"></div>
+    <div style="width: 135px;" class="button" onclick="javascript:location.href=&#39;../Home/OrderPlatform.aspx&#39;;"></div>
+    <div style="width:8px;"></div>
+    <div style="width: 128px;" class="button" onclick="javascript:location.href=&#39;../Home/ExpertIntro.aspx&#39;;"></div>
+    <div style="width:8px;"></div>
+    <div style="width: 135px;" class="button" onclick="javascript:location.href=&#39;../Home/RealInfo.aspx&#39;;"></div>
+    <div style="width:8px;"></div>
+    <div style="width: 138px;" class="button" onclick="javascript:location.href=&#39;../Home/OnlineTreatment.aspx&#39;;"></div>
+    <div style="width:8px;"></div>
+    <div style="width: 143px;" class="button" onclick="javascript:location.href=&#39;../Home/OnlineConsult.aspx&#39;;"></div>
+</div>
+<!--头部主菜单   结束--> 
+<script type="text/javascript">
+    function SetCurrentTopMenu(i) {
+        $($("#topmenu").children(".button").get(i)).attr("className", "button" + (i + 1));
+        $("a[name='loginOut']").click(function() {
+            $(this).huAjax({ url: "../Haddle/Users.ashx", data: { Action: "Users_LoginOut" }
+                    , error: function(v) {
+                    }
+                    , success: function(data, textStatus) {
+                        if (data.Tag == $.AjaxResultTag.Success) {
+                            location.href = "http://health.nbws.gov.cn";
+                        }
+                    }
+            });
+        });
+    }</script>   
+           
+         
+        
+
+
+    <div style="display:block; text-align: center">
+        
+<style type="text/css">
+    .auto-style1 {
+        width: 90px;
+    }
+</style>
+<table cellpadding="0" cellspacing="0" class="myhealth_topmenu" width="100%" align="center" style="position: relative">
+    <tbody><tr style="background-image: url(&#39;../Resources/images/xiatiao.jpg&#39;); background-repeat: no-repeat; width: 991px; height: 5px; margin-left: auto; margin-right: auto; background-position: 0px bottom;">
+        <td top="1" style="width: 3%;" width="150"></td>
+        <td top="1" style="display:none; width: 15%;" width="150">
+            <div class="button1 f_c264F79_s14_wb">
+            <table class="submenu" cellpadding="0" cellspacing="0">
+                <tbody><tr>
+                    <td class="left" style="width: 50px">&nbsp;</td>
+                    <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/HealthProfiles/HealthCover.aspx" style="font-size: 15px;">档案封面</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/HealthProfiles/BasicInformationNew.aspx" style="font-size: 15px;">核心档案</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/HealthProfiles/BehaviorHabit.aspx" style="font-size: 15px;">行为习惯</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/HealthProfiles/HealthInformation.aspx" style="font-size: 15px;">健康信息</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/HealthProfiles/FamilyHealthRecord.aspx" style="font-size: 15px;">家庭档案</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/HealthProfiles/HistoryAchieveInfo2.aspx" style="font-size: 15px;">历史档案</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/HealthProfiles/BloodRecord.aspx" style="font-size: 15px;">献血记录</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td class="right">&nbsp;</td>
+                </tr>
+            </tbody></table>
+        </div></td>
+        <td top="1" style="; width: 15%" width="150">
+            <div class="button2 f_c264F79_s14_wb">
+            <table class="submenu" cellpadding="0" cellspacing="0">
+                <tbody><tr>
+                    <td class="left" style="width: 100px">&nbsp;</td>   
+                    <td style="; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/DoctorOutP/DoctorInfolist.aspx" style="font-size: 15px;">门诊信息</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/DoctorOutP/HospitaList.aspx" style="font-size: 15px;">住院信息</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx" style="font-size: 15px;">化验信息</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    
+                    <td style="; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/DoctorOutP/ExamineReportList.aspx" style="font-size: 15px;">检查信息</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/DoctorOutP/ExamineReportListCloud.aspx" style="font-size: 15px;">云影像</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/DoctorOutP/YunHisList.aspx" style="font-size: 15px;">云医院</a><a style="color: gray; font-size: 20px; margin-left: 6px;">|</a></td>
+                   
+                    <td class="right">&nbsp;</td>
+                     <td class="right">&nbsp;</td>
+                    <!-- ../HealthProfiles/HistoryAchieveInfo.aspx
+                      \宁波加密\KingT.MedicalCt.HealthRecords2\HealthProfiles\HealthInforList.aspx                       
+                        -->
+                </tr>
+            </tbody></table>
+        </div></td>
+        
+    <td top="1" style="display:none; width: 15%;" width="150">
+        <div class="button6 f_c264F79_s14_wb">
+        <table class="submenu" cellpadding="0" cellspacing="0">
+            <tbody><tr>
+                <td class="left">&nbsp;</td>
+                <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/HealthProfiles/BirthCertificateInfo.aspx" style="font-size: 15px;">出生证明</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td> 
+                <td style="display:none;; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Mchs/ChildrenHealth.aspx" style="font-size: 15px;">儿童保健</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                <td style="width: 90px;display:none;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Mchs/Planimmunity.aspx" style="font-size: 15px;">计划免疫</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                <td style="display:none;; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Mchs/WomenHealth.aspx" style="font-size: 15px;">妇女保健</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Elder/Elder.aspx" style="font-size: 15px;">老年保健</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Deformity/Deformity.aspx" style="font-size: 15px;">残疾保健</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                <td style="display:none; width: 90px;" class="bf6C6C6D"><a onclick="window.open(&#39;http://192.168.10.19/rhm/hismzzj.htm?ywdm=2801&amp;sfzh=&amp;xmldata=%3Crequest%3E%3CDLXX%3E%3Cloginname%3ESSZY%3C/loginname%3E%3Cpassword%3E85aa3570eff7205e702d192abe95676b5988e53d%3C/password%3E%3Cbdfs%3E1%3C/bdfs%3E%3Cyljgzzdm%3E%3C/yljgzzdm%3E%3C/DLXX%3E%3C/request%3E&#39;)" href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=3#" style="font-size: 15px;">健康教育</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Chronic/Deash_New.aspx" style="font-size: 15px;">死亡证明</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                <td class="right">&nbsp;</td>
+            </tr>
+        </tbody></table>
+    </div></td>
+        <td top="1" style="display:none; width: 15%;" width="150">
+            <div class="button3 f_c264F79_s14_wb">
+            <table class="submenu" cellpadding="0" cellspacing="0">
+                <tbody><tr>
+                    <td class="left">&nbsp;</td>
+                    <td style="display:none; width: 80px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Chronic/INFE_CardList.aspx" style="font-size: 15px;">传染病</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="display:none; width: 80px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Chronic/Ht.aspx" style="font-size: 15px;">高血压</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="display:none; width: 80px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Chronic/Diabete.aspx" style="font-size: 15px;">糖尿病</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Chronic/CHD.aspx" style="font-size: 15px;">心脑血管</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="display:none; width: 70px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Chronic/Tumor.aspx" style="font-size: 15px;">肿瘤</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td style="display:none; width: 80px;" class="bf6C6C6D"><a id="jsba" href="http://172.17.10.230:8005/Chronic/Psychosis.aspx" target="" style="font-size: 15px;">精神病</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                    <td class="right">&nbsp;</td>
+                </tr>
+            </tbody></table>
+        </div></td>
+        <td top="1" style="display:none; width: 15%;" width="150">
+            <div class="button5 f_c264F79_s14_wb">
+            <div>
+                <table class="submenu" cellpadding="0" cellspacing="0">
+                    <tbody><tr>
+                        <td class="left">&nbsp;</td>
+                        <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Peis/CheckinRepList.aspx" style="font-size: 15px;">普通体检</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                        <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Peis/ManCheckinRepList.aspx" style="font-size: 15px;">健康体检</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                        <td style="display:none; width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Peis/CheckinRepMergeList.aspx" style="font-size: 15px;">体检信息</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                        <td class="right">&nbsp;</td>
+                    </tr>
+                </tbody></table>
+             </div>
+        </div></td>
+      
+    <td top="1" style="; width: 15%;" width="150">
+        <div class="button7 f_c264F79_s14_wb">
+        <div>
+                <table class="submenu" cellpadding="0" cellspacing="0">
+                    <tbody><tr>
+                        <td class="left">&nbsp;</td>
+                        <td style="width: 90px;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/home/LifeCycleUrl.aspx?headtype=1011" style="font-size: 15px;">全生命周期</a><a style="color: gray; font-size: 20px; margin-left: 10px;">|</a></td>
+                        <td class="right">&nbsp;</td>
+                    </tr>
+                </tbody></table>
+             </div> 
+    </div></td>
+        <td top="1" width="150"></td>
+    </tr>
+</tbody></table>
+<script type="text/javascript">
+    var myhealth_topmenu_bar = $("table.myhealth_topmenu td[top='1']");
+    myhealth_topmenu_bar.attr("width", 150);
+    //var myhealth_submenu_bar = $(".submenu td", myhealth_topmenu_bar);
+    $("table td[className='']", myhealth_topmenu_bar).attr("className", "bf6C6C6D");
+    $(function () {
+        myhealth_topmenu_bar.bind("click", function () {
+            //myhealth_topmenu_bar.attr("className", "").attr("Selected", "0");
+            //$(this).attr("className", "select").attr("Selected", "1");
+        });
+        myhealth_topmenu_bar.bind("mouseover", function (event) {  
+            if ($(event.srcElement).attr("over") == "1" && $(event.toElement).attr("over") == "1") return;
+            $(this).attr("className", "select").attr("over", "1"); 
+            
+            $("div:eq(0)", this).css("color", "#FFFFFF");
+            var submenu = $(".submenu", this);
+            var classname = $("div:eq(0)", this).attr("class"); debugger
+            if (classname == "button5 f_c264F79_s14_wb" || classname == "button7 f_c264F79_s14_wb") {//体检模块\全生命周期 
+                $(".left", this).css("width", parseInt($(this).position().left) - 30);//主菜单位置往前推30个像素
+            }
+            else if (classname == "button6 f_c264F79_s14_wb" || classname == "button3 f_c264F79_s14_wb") {//妇幼、传染病按个数计算停靠位置
+               
+                var v1 = parseInt($(this).position().left);
+                var v2 = 0;
+                $("td", submenu).each(function (index, element) {
+                    if (index > 0 && $(element).css("display") != "none") v2 += $(element).outerWidth()/2;
+                });
+                debugger
+                var lwd = v1 - v2;
+                lwd = Math.max(100, lwd);
+                $(".left", this).css("width", lwd);
+            }
+            submenu.css("position", "absolute").css("left", 0).show();
+            $("td", submenu).attr("over", "1");
+            $("a", submenu).attr("over", "1");
+            $("div", this).attr("over", "1");
+            $(event.srcElement).attr("over", "1");
+            //event.stopPropagation();
+        });
+        myhealth_topmenu_bar.bind("mouseout", function (event) {
+            //alert($(event.toElement).attr("over"))
+            if ($(event.srcElement).attr("over") == "1" && $(event.toElement).attr("over") == "1") return;
+            $("div:eq(0)", this).css("color", "");
+            $(event.srcElement).attr("over", "0");
+            $(this).attr("className", "").attr("over", "0");
+            var submenu = $( ".submenu", this).hide();
+            $("td", submenu).attr("over", "0");
+            $("a", submenu).attr("over", "0");
+            $("div", this).attr("over", "0"); 
+        });
+        //        myhealth_submenu_bar.bind("mouseout", function(event) {
+        //            event.stopPropagation();
+        //         });
+        //myhealth_topmenu_bar[0].click();
+
+            if ($("#jsba").attr("target") == "_black") {
+                $("#jsba").text("精神卫生");
+            }
+    });
+</script>
+
+    </div>
+    <div style="position: absolute; top: 1px; left: 0px; width: 100%;">
+        <div class="bigDIV">
+            <a href="javascript:void(0)" name="loginOut" style="">
+                
+            </a>
+        </div>
+    </div>
+    <div class="bigDIV" style="margin-top: 15px;">
+        <div style="display:block;float: left; width: 190px; margin-top: 10px;">
+            <div class="aliceblue">
+                <div class="head">
+                    <div class="left">
+                    </div>
+                    <div style="width: 180px; background-image: url(&#39;../Resources/images/title_jbxx.jpg&#39;); background-repeat: no-repeat;">
+                        <a style="display:none; float: right; padding-top: 5px; height: 10px; padding-right: 2px" class="f_c264F79_s12" href="javascript:void(0)" id="lbtOut" name="loginOut">退出</a>
+                        <a style="display:none; float: right; padding-top: 5px; height: 10px; padding-right: 2px" class="f_c264F79_s12" id="lbtMyHealth" href="http://172.17.10.230:8005/Home/MyHealthInfo.aspx">首页</a>
+                        <a style="display:block; float: right; padding-top: 5px; height: 10px; padding-right: 2px;" class="f_c264F79_s12" href="http://172.17.10.230:8005/Home/MyHealthInfo_IdentityVerification.aspx" title="隐私设置">设置</a>
+                    </div>
+                    <div class="right">
+                    </div>
+                </div>
+                <div class="content1" id="PersionInfo">
+                    <div style="width: 181px; padding-top: 5px;">
+                        <div class="title">
+                            <span>个人信息</span> &nbsp;
+                        </div>
+                        <table cellpadding="0" cellspacing="0" width="100%" class="f_c484848_s12">
+                            <tbody><tr>
+                                <td width="70px" class="memo_tart">姓<span style="visibility: hidden">空空</span>名：
+                                </td>
+                                <td align="left">&nbsp;
+                                    <label id="lblName" field="NAME">杨勇</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" class="memo_tart">性<span style="visibility: hidden">空空</span>别：
+                                </td>
+                                <td align="left">&nbsp;
+                                    <label id="lblSEX" field="SEXNAME">男</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" class="memo_tart">出生日期：
+                                </td>
+                                <td align="left">&nbsp;
+                                    <label id="lblBIRTHDAY" field="BIRTHDAY" format="yyyy-MM-dd">1995-04-26</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" class="memo_tart">联系电话：
+                                </td>
+                                <td align="left">&nbsp;
+                                    <label id="lblLinkTel" field="LINKPHONE">&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" class="memo_tart">地<span style="visibility: hidden">空空</span>址：
+                                </td>
+                                <td align="left">&nbsp;
+                                    <label id="lblHOME_ADDRESS" field="HOME_ADDRESS">浙江省金华市义乌市田心村</label>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+
+                    <div style="width: 181px;">
+                        <div class="title">
+                            <span>管理医生</span>
+                        </div>
+
+                        
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tbody><tr>
+                                <td width="70px" class="memo_tart">责任医生：
+                                </td>
+                                <td align="left">&nbsp;
+                                    <label id="lblManagerEmpName" field="EMP_NAME">&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" class="memo_tart">联系电话：
+                                </td>
+                                <td align="left">&nbsp;
+                                    <label id="lblDOC_LINKTELPHONE" field="DOC_LINKTELPHONE">&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" class="memo_tart">服务中心：
+                                </td>
+                                <td align="left">&nbsp;
+                                    <label id="lblManagerOrgName" field="ORG_NAME">&nbsp;</label>
+                                </td>
+                            </tr>
+                            <!--
+                            
+                           D.EMP_NAME SIGN_NAME,
+                            (SELECT ORG_NAME FROM KTSYS_ORGANIZATION WHERE ORG_CODE=D.ORG_CODE) SIGN_ORG,
+                            (SELECT MOBILE FROM KTDIC_EMPLOYEE_INFO WHERE EMP_ID=D.EMP_CODE) SIGN_LINKTELPHONE,
+                            -->
+                           
+                            <tr style="">
+                                <td width="70px" class="memo_tart">签约医生：
+                                </td>
+                                <td align="left">&nbsp;
+                                    <label id="lblSignEmpName" field="SIGN_NAME">&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr style="">
+                                <td align="right" class="memo_tart">联系电话：
+                                </td>
+                                <td align="left">&nbsp;
+                                    <label id="lblSIGN_LINKTELPHONE" field="SIGN_LINKTELPHONE">&nbsp;</label>
+                                </td>
+                            </tr>
+                            <tr style="">
+                                <td align="right" class="memo_tart">签约机构：
+                                </td>
+                                <td align="left">&nbsp;
+                                    <label id="lblSignOrgName" field="SIGN_ORG">&nbsp;</label>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="aliceblue" style="margin-top: 10px; display:none">
+                <div class="head">
+                    <div class="left">
+                    </div>
+                    <div style="width: 180px; background-image: url(&#39;../Resources/images/title_ndjkxx.jpg&#39;); background-repeat: no-repeat">
+                    </div>
+                    <div class="right">
+                    </div>
+                </div>
+                <div class="content1">
+                    <div style="width: 189px; padding-top: 5px;">
+                        <!--=====================高血压  start===================-->
+                        <div style="display:none" id="pnlHt">
+                            <div class="title f_c484848_s12" id="pnlHtHead">
+                                <span>高血压</span>
+                            </div>
+                            <div class="f_c484848_s12">
+                                <div style="float: left; margin-left: 6px;" title="正常血压：&lt;140/90mmHg">
+                                    <div style="float: left; width: 14px; height: 14px; background-color: #069931">
+                                        &nbsp;
+                                    </div>
+                                    <div style="float: left; background-color: #EEF9E8;">
+                                        正常
+                                    </div>
+                                </div>
+                                <div style="float: left;" title="轻度高血压：140-160/90-100mmHg">
+                                    <div style="float: left; width: 14px; height: 14px; background-color: #FFFF00">
+                                        &nbsp;
+                                    </div>
+                                    <div style="float: left; background-color: #EEF9E8;">
+                                        轻度
+                                    </div>
+                                </div>
+                                <div style="float: left;" title="中度高血压：160-180/100-110mmHg">
+                                    <div style="float: left; width: 14px; height: 14px; background-color: #00FF00">
+                                        &nbsp;
+                                    </div>
+                                    <div style="float: left; background-color: #EEF9E8;">
+                                        中度
+                                    </div>
+                                </div>
+                                <div style="float: left;" title="轻度高血压：&gt;=180/110mmHg">
+                                    <div style="float: left; width: 14px; height: 14px; background-color: #FF0000">
+                                        &nbsp;
+                                    </div>
+                                    <div style="float: left; background-color: #EEF9E8;">
+                                        重度
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="chartdivHt">
+                            </div>
+                            <table cellpadding="0" cellspacing="0" width="100%" class="f_c484848_s12" id="PersonHtVisit" style="margin-top: 5px;">
+                                <tbody><tr>
+                                    <td width="80px" align="right" class="memo_tart">最近测压：
+                                    </td>
+                                    <td align="left">
+                                        <label id="lblSPB" field="SPB">
+                                        </label>
+                                        /<label id="lblDPB" field="DPB"></label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="memo_tart">最近随访：
+                                    </td>
+                                    <td align="left">
+                                        <label id="lblVISITS_DATE" field="VISITS_DATE" format="yyyy-MM-dd">
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="memo_tart">下次随访：
+                                    </td>
+                                    <td align="left">
+                                        <label id="lblNEXT_VISITS_DATE" field="NEXT_VISITS_DATE" format="yyyy-MM-dd">
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </div>
+                        <!--=====================高血压  end===================-->
+                        <!--=====================糖尿病  start===================-->
+                        <div style="display:none" id="pnlDm">
+                            <div class="title f_c484848_s12">
+                                <span>糖尿病</span>
+                            </div>
+                            <div class="f_c484848_s12">
+                                <div style="float: left; margin-left: 6px;" title="正常空腹血糖：3.5-6.1mmol/l">
+                                    <div style="float: left; width: 14px; height: 14px; background-color: #069931">
+                                        &nbsp;
+                                    </div>
+                                    <div style="float: left; background-color: #EEF9E8;">
+                                        正常
+                                    </div>
+                                </div>
+                                <div style="float: left;" title="空腹血糖≥6.1-7.0 mmol/l">
+                                    <div style="float: left; width: 14px; height: 14px; background-color: #FFFF00">
+                                        &nbsp;
+                                    </div>
+                                    <div style="float: left; background-color: #EEF9E8;">
+                                        异常
+                                    </div>
+                                </div>
+                                <div style="float: left;" title="空腹血糖≥7.0 mmol/l或餐后血糖≥11.1 mmol/l">
+                                    <div style="float: left; width: 14px; height: 14px; background-color: #FF0000">
+                                        &nbsp;
+                                    </div>
+                                    <div style="float: left; background-color: #EEF9E8;">
+                                        确诊
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="chartdivDm">
+                            </div>
+                            <table cellpadding="0" cellspacing="0" width="100%" class="f_c484848_s12" id="PersonDmVisit">
+                                <tbody><tr>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td width="70px" class="memo_tart">空腹血糖：
+                                    </td>
+                                    <td align="left">
+                                        <label id="lblFBG" field="FBG">
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="70px" class="memo_tart" title="餐后2小时血糖">餐后血糖：
+                                    </td>
+                                    <td align="left">
+                                        <label id="lblPBG" title="餐后2小时血糖" field="PBG">
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="memo_tart">最近随访：
+                                    </td>
+                                    <td align="left">
+                                        <label id="lblVISITS_DATE" field="VISITS_DATE">
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="memo_tart">下次随访：
+                                    </td>
+                                    <td align="left">
+                                        <label id="lblNEXT_VISITS_DATE" field="NEXT_VISITS_DATE" format="yyyy-MM-dd">
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </div>
+                        <!--=====================糖尿病  end===================-->
+                        <div style="display:none">
+                            <!--=====================心脑血管  start===================-->
+                            <div class="title f_c484848_s12">
+                                <span>心脑血管</span>
+                            </div>
+                            <div id="chartdivCva">
+                            </div>
+                            <table cellpadding="0" cellspacing="0" width="100%" class="f_c484848_s12" id="PersonCvaVisit">
+                                <tbody><tr>
+                                    <td width="70px" align="right" class="memo_tart">最近随访：
+                                    </td>
+                                    <td align="left">
+                                        <label id="Label5" field="VISITS_DATE">
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="70px" align="right" class="memo_tart">下次随访：
+                                    </td>
+                                    <td align="left">
+                                        <label id="Label6" field="NEXT_VISITS_DATE" format="yyyy-MM-dd">
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </div>
+                        <!--=====================心脑血管  end===================-->
+                        <!--=====================肿瘤  start===================-->
+                        <div style="display:none">
+                            <div class="title f_c484848_s12">
+                                <span>肿&nbsp;&nbsp;&nbsp;瘤</span>
+                            </div>
+                            <div id="chartdivTumor">
+                            </div>
+                            <table cellpadding="0" cellspacing="0" width="181px" class="f_c484848_s12" id="PersonTumorVisit">
+                                <tbody><tr>
+                                    <td width="70px" align="right" class="memo_tart">最近随访：
+                                    </td>
+                                    <td align="left">
+                                        <label id="Label7" field="VISITS_DATE">
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="70px" align="right" class="memo_tart">下次随访：
+                                    </td>
+                                    <td align="left">
+                                        <label id="Label8" field="NEXT_VISITS_DATE" format="yyyy-MM-dd">
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="aliceblue" style="margin-top: 10px; display:block">
+                <div class="head">
+                    <div class="left">
+                    </div>
+                    <div style="width: 180px; background-image: url(&#39;../Resources/images/title_jwzd.jpg&#39;); background-repeat: no-repeat">
+                    </div>
+                    <div class="right">
+                    </div>
+                </div>
+                <div class="content">
+                    <table class="table_bcE4E4E4" cellspacing="1" cellpadding="0" border="0" id="ctl00_ctl00_ContentPlaceHolder1_ktGridDocHistory" style="border-width:0px;width:100%;position: relative; top: -1px;">
+	<thead>
+		<tr>
+			<th title="诊断编码" class="left" scope="col" style="width:70px;">诊断编码</th><th title="诊断名称" class="right" scope="col">诊断名称</th>
+		</tr>
+	</thead><tbody>
+		<tr class="bb1C5E6FF">
+			<td><a>I10.x00</a></td><td title="高血压 ,肾功能不全 ">高血压 ,肾功能不全 </td>
+		</tr><tr class="bb1C5E6FF">
+			<td><a>H10.900</a></td><td title="结膜炎 ">结膜炎 </td>
+		</tr><tr class="bb1C5E6FF">
+			<td><a>I10.x00</a></td><td title="高血压 ,肾功能不全 ">高血压 ,肾功能不全 </td>
+		</tr><tr class="bb1C5E6FF">
+			<td><a>I10.x00</a></td><td title="高血压 ,肾功能不全 ">高血压 ,肾功能不全 </td>
+		</tr><tr class="bb1C5E6FF">
+			<td><a></a></td><td title="肾功能不全">肾功能不全</td>
+		</tr><tr class="bb1C5E6FF">
+			<td><a>I10.x00</a></td><td title="高血压 ,肾功能不全 ">高血压 ,肾功能不全 </td>
+		</tr>
+	</tbody><tfoot>
+
+	</tfoot>
+</table>
+                </div>
+            </div>
+        </div>
+        
+
+    <div style="float: right; width: 786px;">
+        <div style="display:none">
+            
+<style type="text/css">
+    .style1 {
+        width: 27px;
+    }
+</style>
+<table cellpadding="0" cellspacing="0" class="myhealth_topmenu1" width="100%">
+    <tbody><tr>
+        <td class="left"></td>
+        <td top="1" style="display:none" width="158">
+            <div class="button1 f_c264F79_s14_wb">档案信息</div>
+            <table class="submenu" cellpadding="0" cellspacing="0">
+                <tbody><tr>
+                    <td class="left">&nbsp;</td>
+                    <td style="display:none" class="bf6C6C6D"><a href="http://172.17.10.230:8005/HealthProfiles/BasicInformation.aspx">核心档案</a></td>
+                    <td style="display:none" class="bf6C6C6D"><a href="http://172.17.10.230:8005/HealthProfiles/BehaviorHabit.aspx">行为习惯</a></td>
+                    <td style="display:none" class="bf6C6C6D"><a href="http://172.17.10.230:8005/HealthProfiles/HealthInformation.aspx">健康信息</a></td>
+                    <td style="display:none" class="bf6C6C6D"><a href="http://172.17.10.230:8005/HealthProfiles/FamilyHealthRecord.aspx">家庭档案</a></td>
+                    <td class="right">&nbsp;</td>
+                </tr>
+            </tbody></table>
+        </td>
+        <td top="1" style="" width="158">
+            <div class="button2 f_c264F79_s14_wb">医疗服务</div>
+            <table class="submenu" cellpadding="0" cellspacing="0">
+                <tbody><tr>
+                    <td class="left">&nbsp;</td>
+                    <td style="" class="bf6C6C6D"><a href="http://172.17.10.230:8005/DoctorOutP/DoctorInfolist.aspx">就诊信息</a></td>
+                    <td style="" class="bf6C6C6D"><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx">检验信息</a></td>
+                    <td style="" class="bf6C6C6D"><a href="http://172.17.10.230:8005/DoctorOutP/ExamineReportList.aspx">检查信息</a></td>
+                    <td style="" class="bf6C6C6D"><a href="http://172.17.10.230:8005/DoctorOutP/HospitaList.aspx">住院信息</a></td>
+                    <td class="right">&nbsp;</td>
+                </tr>
+            </tbody></table>
+        </td>
+        
+        <td top="1" style="display:none" width="158">
+            <div class="button6 f_c264F79_s14_wb">妇幼保健</div>
+            <table class="submenu" cellpadding="0" cellspacing="0">
+                <tbody><tr>
+                    <td class="left">&nbsp;</td>
+                    <td style="display:none;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Mchs/ChildrenHealth.aspx">儿童保健</a></td>
+                    <td class="style1"><a href="http://172.17.10.230:8005/EPI/Planimmunity.aspx">计划免疫</a></td>
+                    <td style="display:none;" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Mchs/WomenHealth.aspx" "="">妇女保健</a></td>
+                    <td style="display:none" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Elder/Elder.aspx">老年保健</a></td>
+                    <td style="display:none" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Deformity/Deformity.aspx">残疾保健</a></td>
+                    <td class="right">&nbsp;</td>
+                </tr>
+            </tbody></table>
+        </td>
+        <td top="1" style="display:none" width="158">
+            <div class="button3 f_c264F79_s14_wb">疾病专项</div>
+            <table class="submenu" cellpadding="0" cellspacing="0">
+                <tbody><tr>
+                    <td class="left">&nbsp;</td>
+                    <td style="display:none" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Chronic/INFE_CardList.aspx">传染病</a></td>
+                    <td style="display:none" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Chronic/Ht.aspx">高血压</a></td>
+                    <td style="display:none" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Chronic/Diabete.aspx">糖尿病</a></td>
+                    <td style="display:none" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Chronic/CHD.aspx">心脑血管</a></td>
+                    <td style="display:none" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Chronic/Tumor.aspx">肿瘤</a></td>
+                    <td style="display:none" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Chronic/Psychosis.aspx">精神病</a></td>
+                    <td class="right">&nbsp;</td>
+                </tr>
+            </tbody></table>
+        </td>
+        <td top="1" style="" width="158">
+            <div class="button5 f_c264F79_s14_wb">体检专项</div>
+            <table class="submenu" cellpadding="0" cellspacing="0">
+                <tbody><tr>
+                    <td class="left">&nbsp;</td>
+                    <td style="" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Peis/CheckinRepList.aspx">普通体检</a></td>
+                    <td style="display:none" class="bf6C6C6D"><a href="http://172.17.10.230:8005/Peis/ManCheckinRepList.aspx">健康体检</a></td>
+                    <td class="right">&nbsp;</td>
+                </tr>
+            </tbody></table>
+        </td>
+        <td>&nbsp;</td>
+        <td class="right"></td>
+    </tr>
+    <tr>
+        <td id="menubox"></td>
+    </tr>
+</tbody></table>
+<script type="text/javascript">
+    var myhealth_topmenu1_bar = $("table.myhealth_topmenu1 td[top='1']");
+    myhealth_topmenu1_bar.attr("width", 158);
+    //var myhealth_submenu_bar = $(".submenu td", myhealth_topmenu1_bar);
+    $("table td[className='']", myhealth_topmenu1_bar).attr("className", "bf6C6C6D");
+    $(function () {
+        myhealth_topmenu1_bar.bind("click", function () {
+            //myhealth_topmenu1_bar.attr("className", "").attr("Selected", "0");
+            //$(this).attr("className", "select").attr("Selected", "1");
+        });
+        myhealth_topmenu1_bar.bind("mouseover", function (event) {
+            if ($(event.srcElement).attr("over") == "1" && $(event.toElement).attr("over") == "1") return;
+            $(this).attr("className", "select").attr("over", "1");
+            $("div:eq(0)", this).css("color", "#FFFFFF");
+            var submenu = $(".submenu", this).show();
+            $("td", submenu).attr("over", "1");
+            $("a", submenu).attr("over", "1");
+            $("div", this).attr("over", "1");
+            $(event.srcElement).attr("over", "1");
+            //event.stopPropagation();
+        });
+        myhealth_topmenu1_bar.bind("mouseout", function (event) {
+            //alert($(event.toElement).attr("over"))
+            if ($(event.srcElement).attr("over") == "1" && $(event.toElement).attr("over") == "1") return;
+            $("div:eq(0)", this).css("color", "");
+            $(event.srcElement).attr("over", "0");
+            $(this).attr("className", "").attr("over", "0");
+            var submenu = $(".submenu", this).hide();
+            $("td", submenu).attr("over", "0");
+            $("a", submenu).attr("over", "0");
+            $("div", this).attr("over", "0");
+        });
+        //        myhealth_submenu_bar.bind("mouseout", function(event) {
+        //            event.stopPropagation();
+        //         });
+        //myhealth_topmenu1_bar[0].click();
+    });
+</script>
+
+        </div>
+        <div class="aliceblue" style="margin-top: 10px;" id="MedBox">
+            <div class="head">
+                <div class="left">
+                </div>
+                <div style="width: 760px; background-image: url(&#39;../Resources/images/jyxx.jpg&#39;); background-repeat: no-repeat">
+                </div>
+                <div class="right">
+                </div>
+            </div>
+        </div>
+        <div class="aliceblue_bar" id="Div1">
+            <div class="content" style="padding-top: 15px; padding-bottom: 15px;">
+                <table class="tableblue" cellspacing="0" cellpadding="1" border="0" id="ctl00_ctl00_ContentPlaceHolder1_rightContentHolder_ktGridList" style="border-width:0px;width:96%;border-collapse:collapse;">
+	<thead>
+		<tr>
+			<th title="序号" class="left" scope="col" style="width:45px;">序号</th><th title="报告单编号" scope="col" style="width:120px;">报告单编号</th><th title="报告日期" scope="col" style="width:80px;">报告日期</th><th title="检验项目" scope="col" style="width:160px;">检验项目</th><th title="检查单位" scope="col">检查单位</th><th title="详情" scope="col" style="width:50px;">详情</th>
+		</tr>
+	</thead><tbody>
+		<tr class="bb1C5E6FF">
+			<td title="21">21</td><td title="40433742" align="center">40433742</td><td><a>2025-06-07</a></td><td title="肾功能常规检查(血清)" align="left">肾功能常规检查(血清)</td><td title="浙江大学医学院附属第四医院">浙江大学医学院附属第四医院</td><td>
+                                <a href="javascript:void(0)" winwidth="920" winheight="500" title="检验报告单" winurl="../DoctorOutP/AssayReport.aspx?orgCode=9A07BCF20BB07AE874AF278DEC7C06F2&amp;reportNo=FB108C0A3BE27F8C1E1A8F9F34A5624C">详情</a>
+                            </td>
+		</tr><tr class="bb1C5E6FF">
+			<td title="22">22</td><td title="40433741" align="center">40433741</td><td><a>2025-06-07</a></td><td title="血常规(全血)" align="left">血常规(全血)</td><td title="浙江大学医学院附属第四医院">浙江大学医学院附属第四医院</td><td>
+                                <a href="javascript:void(0)" winwidth="920" winheight="500" title="检验报告单" winurl="../DoctorOutP/AssayReport.aspx?orgCode=9A07BCF20BB07AE874AF278DEC7C06F2&amp;reportNo=C714A46138A7B1BC941543FC608D17A6">详情</a>
+                            </td>
+		</tr><tr class="bb1C5E6FF">
+			<td title="23">23</td><td title="40029327" align="center">40029327</td><td><a>2025-05-28</a></td><td title="随机尿肾功能(随机尿)" align="left">随机尿肾功能(随机尿)</td><td title="浙江大学医学院附属第四医院">浙江大学医学院附属第四医院</td><td>
+                                <a href="javascript:void(0)" winwidth="920" winheight="500" title="检验报告单" winurl="../DoctorOutP/AssayReport.aspx?orgCode=9A07BCF20BB07AE874AF278DEC7C06F2&amp;reportNo=2872A66326078E83ECBAA042F300FA5E">详情</a>
+                            </td>
+		</tr><tr class="bb1C5E6FF">
+			<td title="24">24</td><td title="40029324" align="center">40029324</td><td><a>2025-05-28</a></td><td title="生化常规(血清)" align="left">生化常规(血清)</td><td title="浙江大学医学院附属第四医院">浙江大学医学院附属第四医院</td><td>
+                                <a href="javascript:void(0)" winwidth="920" winheight="500" title="检验报告单" winurl="../DoctorOutP/AssayReport.aspx?orgCode=9A07BCF20BB07AE874AF278DEC7C06F2&amp;reportNo=B9FBDE6E8AAA0AB15F65FB06D6767606">详情</a>
+                            </td>
+		</tr><tr class="bb1C5E6FF">
+			<td title="25">25</td><td title="40029325" align="center">40029325</td><td><a>2025-05-28</a></td><td title="尿液分析(随机尿)" align="left">尿液分析(随机尿)</td><td title="浙江大学医学院附属第四医院">浙江大学医学院附属第四医院</td><td>
+                                <a href="javascript:void(0)" winwidth="920" winheight="500" title="检验报告单" winurl="../DoctorOutP/AssayReport.aspx?orgCode=9A07BCF20BB07AE874AF278DEC7C06F2&amp;reportNo=A85C504DD83F889E9166A0E627F392B3">详情</a>
+                            </td>
+		</tr><tr class="bb1C5E6FF">
+			<td title="26">26</td><td title="40029326" align="center">40029326</td><td><a>2025-05-28</a></td><td title="尿红细胞形态(随机尿)" align="left">尿红细胞形态(随机尿)</td><td title="浙江大学医学院附属第四医院">浙江大学医学院附属第四医院</td><td>
+                                <a href="javascript:void(0)" winwidth="920" winheight="500" title="检验报告单" winurl="../DoctorOutP/AssayReport.aspx?orgCode=9A07BCF20BB07AE874AF278DEC7C06F2&amp;reportNo=60D058C2BD2B2C8B3187F347244421F0">详情</a>
+                            </td>
+		</tr><tr class="bb1C5E6FF">
+			<td title="27">27</td><td title="40029323" align="center">40029323</td><td><a>2025-05-28</a></td><td title="血常规(全血)" align="left">血常规(全血)</td><td title="浙江大学医学院附属第四医院">浙江大学医学院附属第四医院</td><td>
+                                <a href="javascript:void(0)" winwidth="920" winheight="500" title="检验报告单" winurl="../DoctorOutP/AssayReport.aspx?orgCode=9A07BCF20BB07AE874AF278DEC7C06F2&amp;reportNo=3960AE4B6B8681EA2007351518590A26">详情</a>
+                            </td>
+		</tr><tr class="bb1C5E6FF">
+			<td title="28">28</td><td title="20250517SHE679" align="center">20250517SHE679</td><td><a>2025-05-17</a></td><td title="肝功能常规检查+肾功能常规检查+CysC" align="left">肝功能常规检查+肾功能常规检查+CysC</td><td title="义乌市中心医院">义乌市中心医院</td><td>
+                                <a href="javascript:void(0)" winwidth="920" winheight="500" title="检验报告单" winurl="../DoctorOutP/AssayReport.aspx?orgCode=D59C2E61C533B09E49B7835977FF3035&amp;reportNo=4FA69A91592CDCF6CCCF70CE8BD4BC88">详情</a>
+                            </td>
+		</tr><tr class="bb1C5E6FF">
+			<td title="29">29</td><td title="20250517NLS070" align="center">20250517NLS070</td><td><a>2025-05-17</a></td><td title="尿常规、尿比重+尿红细胞形态" align="left">尿常规、尿比重+尿红细胞形态</td><td title="义乌市中心医院">义乌市中心医院</td><td>
+                                <a href="javascript:void(0)" winwidth="920" winheight="500" title="检验报告单" winurl="../DoctorOutP/AssayReport.aspx?orgCode=D59C2E61C533B09E49B7835977FF3035&amp;reportNo=4FA69A91592CDCF61932DB86D9B5655B">详情</a>
+                            </td>
+		</tr><tr class="bb1C5E6FF">
+			<td title="30">30</td><td title="39894735" align="center">39894735</td><td><a>2025-05-15</a></td><td title="肝功能常规检查(血清)" align="left">肝功能常规检查(血清)</td><td title="浙江大学医学院附属第四医院">浙江大学医学院附属第四医院</td><td>
+                                <a href="javascript:void(0)" winwidth="920" winheight="500" title="检验报告单" winurl="../DoctorOutP/AssayReport.aspx?orgCode=9A07BCF20BB07AE874AF278DEC7C06F2&amp;reportNo=865D4845530BBE00CF143F8B8C9CE8DE">详情</a>
+                            </td>
+		</tr>
+	</tbody><tfoot>
+
+	</tfoot>
+</table>
+                <form name="aspnetForm" method="post" action="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=3" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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QjA5RTQ5Qjc4MzU5NzdGRjMwMzUgNEZBNjlBOTE1OTJDRENGNjE5MzJEQjg2RDlCNTY1NUJkAgYPDxYCHwRlZBYCZg8VAwo0NzE3NzE4NTAwDjIwMjUwNTE3TkxTMDcwFjQ3MTc3MTg5MjAxMzA5NTUyNjU3OTFkAgoPZBYOZg8PFgQfBQUCMzAfBAUCMzBkZAIBDw8WBB8FBQgzOTg5NDczNR8EBQgzOTg5NDczNWRkAgIPDxYCHwRlZBYCZg8PFgIfBQUKMjAyNS0wNS0xNWRkAgMPDxYEHwUFHeiCneWKn+iDveW4uOinhOajgOafpSjooYDmuIUpHwQFHeiCneWKn+iDveW4uOinhOajgOafpSjooYDmuIUpZGQCBA8PFgQfBQUn5rWZ5rGf5aSn5a2m5Yy75a2m6Zmi6ZmE5bGe56ys5Zub5Yy76ZmiHwQFJ+a1meaxn+Wkp+WtpuWMu+WtpumZoumZhOWxnuesrOWbm+WMu+mZomRkAgUPDxYCHwRlZBYCZg8VAiA5QTA3QkNGMjBCQjA3QUU4NzRBRjI3OERFQzdDMDZGMiA4NjVENDg0NTUzMEJCRTAwQ0YxNDNGOEI4QzlDRThERWQCBg8PFgIfBGVkFgJmDxUDCjY4OTE0NTQ5MDAIMzk4OTQ3MzUWNDcxNzcxODkyMDEzMDk1NTI2NTc5MWQCCw8PFgQfAwsrBAIfAGhkFg5mDw8WAh8EBQYmbmJzcDtkZAIBDw8WAh8EBQYmbmJzcDtkZAICDw8WAh8EBQYmbmJzcDtkZAIDDw8WAh8EBQYmbmJzcDtkZAIEDw8WAh8EBQYmbmJzcDtkZAIFDw8WAh8EBQYmbmJzcDtkZAIGDw8WAh8EBQYmbmJzcDtkZAICD2QWBAIBDw8WAh8FBc0BIOWFseacieajgOmqjOiusOW9lSA8Zm9udCBjb2xvcj0iYmx1ZSI+PGI+MTE4PC9iPjwvZm9udD4g5p2hIOWFseaciSA8Zm9udCBjb2xvcj0iYmx1ZSI+PGI+MTI8L2I+PC9mb250PiDpobUg5q+P6aG1IDxmb250IGNvbG9yPSJibHVlIj48Yj4xMDwvYj48L2ZvbnQ+IOadoSDlvZPliY3kuLrnrKwgPGZvbnQgY29sb3I9InJlZCI+PGI+MzwvYj48L2ZvbnQ+IOmhtWRkAgMPDxYEHgtSZWNvcmRjb3VudAJ2HhBDdXJyZW50UGFnZUluZGV4AgNkZAINDw8WAh8AaGRkGAIFPWN0bDAwJGN0bDAwJENvbnRlbnRQbGFjZUhvbGRlcjEkcmlnaHRDb250ZW50SG9sZGVyJGt0R3JpZExpc3QPPCsACgICAgIIAgFkBTBjdGwwMCRjdGwwMCRDb250ZW50UGxhY2VIb2xkZXIxJGt0R3JpZERvY0hpc3RvcnkPPCsACgEIAgFk6B8zRvNc5K3J37g1jqbkHG5f4aE=">
+</div>
+
+                    <div style="margin-top: 10px; line-height: 20px;">
+                        <span id="ctl00_ctl00_ContentPlaceHolder1_rightContentHolder_LabInfo" style="display:inline-block;height:33px;width:518px;"> 共有检验记录 <font color="blue"><b>118</b></font> 条 共有 <font color="blue"><b>12</b></font> 页 每页 <font color="blue"><b>10</b></font> 条 当前为第 <font color="red"><b>3</b></font> 页</span>
+                        
+<div id="ctl00_ctl00_ContentPlaceHolder1_rightContentHolder_InforPager">
+	<a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=1" style="margin-right:5px;">首页</a><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=2" style="margin-right:5px;">上一页</a><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=1" style="margin-right:5px;">1</a><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=2" style="margin-right:5px;">2</a><span style="margin-right:5px;font-weight:Bold;color:red;">3</span><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=4" style="margin-right:5px;">4</a><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=5" style="margin-right:5px;">5</a><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=6" style="margin-right:5px;">6</a><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=7" style="margin-right:5px;">7</a><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=8" style="margin-right:5px;">8</a><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=9" style="margin-right:5px;">9</a><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=10" style="margin-right:5px;">10</a><span style="margin-right:5px;"><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=11">...</a></span><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=4" style="margin-right:5px;">下一页</a><a href="http://172.17.10.230:8005/DoctorOutP/AssayReportList.aspx?page=12" style="margin-right:5px;">尾页</a>
+</div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+        
+<!--底部信息    开始-->
+<div class="frmbottom" style="margin:20 auto 0 auto; width: 1000px;">
+    <div class="logo">
+    </div>
+    <div style=" margin-top:24px;line-height:24px;color:#9c9c9c; text-align:left; margin-left:40px;">
+        版权所有：义乌居民医疗咨询公共服务平台 Copyright (c) 2009-2012  All Rights Reserved<br>
+        技术支持：金唐软件 最佳显示效果使用1024*768分辨率 浏览请使用IE6.0及以上浏览器访问本站
+    </div>
+    
+    <div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function SetSkinCookie(k) {
+        $(this).huAjax({ url: "../Haddle/Users.ashx", data: { Action: "Users_MainSkin", cache: true, SkinKey: k }
+                , error: function(v) {
+                }
+                , success: function(data, textStatus) {
+                    if (data.Tag == $.AjaxResultTag.Success) {
+                        alert(data.Msg);
+                        window.location.reload();
+                    };
+                }
+        });
+    }
+</script>
+
+<!--底部信息   结束-->
+
+        
+        
+    
+
+
+<div id="pnl_loading_memo" style="margin-top:5px;text-align:left;font-size:14px;line-height:20px;position:absolute;display:none;border:solid 1px #666666;color:#666666;background-color:#FFFFFF;padding:4px;"></div><div><div id="maskLevel" style="position: absolute; top: 0px; left: 0px; text-align: center; z-index: 10000; background: rgb(0, 0, 0); opacity: 0.1; width: 1583px; height: 859px;"></div><div id="ym-window" style="position: fixed; z-index: 10001; width: 920px; height: 500px; left: 331.5px; top: 129px;"><div class="ym-tl" id="ym-tl"><div class="ym-tr"><div class="ym-tc" style="cursor:move;"><div class="ym-header-text">检验报告单</div><div class="ym-header-tools"><div class="ymPrompt_min" title="最小化" style="display: none;"><strong>0</strong></div><div class="ymPrompt_max" title="最大化"><strong>1</strong></div><div class="ymPrompt_close" title="关闭"><strong>r</strong></div></div></div></div></div><div class="ym-ml" id="ym-ml"><div class="ym-mr"><div class="ym-mc"><div class="ym-body " style="position: relative; height: 468px;"><iframe style="position:absolute;width:100%;height:100%;top:0;left:0;opacity:1;filter:alpha(opacity=100)" border="0" frameborder="0" src="./检验信息列表1_files/AssayReport.html"></iframe><div style="position:absolute;width:100%;height:100%;top:0;left:0;opacity:1;filter:alpha(opacity=100);background:#000;opacity:0.1;filter:alpha(opacity=10);display:none"></div></div></div></div></div><div class="ym-ml" id="ym-btnl" style="display: none;"><div class="ym-mr"><div class="ym-btn"></div></div></div><div class="ym-bl" id="ym-bl"><div class="ym-br"><div class="ym-bc"></div></div></div></div></div></body></html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)http://172.17.10.118:6059/IpfFirstFront.html?mrn=779773&series=566 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script src="./vue.js.下载"></script>
+		<link rel="stylesheet" href="./layui.css" media="all">
+		<script type="text/javascript" src="./axios.min.js.下载"></script>
+		<script src="./config.js.下载" type="text/javascript"></script>
+		<title>病案首页正面</title>
+				
+		</head><body><div align="center"><!--页头-->
+			<center><img src="./logo.png"></center>
+			<h1 class="align-center">住 院 病 案 首 页</h1>
+		</div>		
+		<style>
+			.layui-form-label{width: auto;}	
+			table, th, td
+			{
+			    border: 1px solid black;
+			}			
+		</style>
+
+	
+	
+	<div id="app"><div id="aaa"><button type="button" class="layui-btn layui-btn-normal layui-btn-radius">病案首页正面</button> <button type="button" class="layui-btn layui-btn-normal layui-btn-radius">病案首页背面</button> <hr> <div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">姓名</label> <div class="layui-input-inline"><input type="text" name="pname" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">性别</label> <div class="layui-input-inline"><input type="text" name="psex" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">科别</label> <div class="layui-input-inline"><input type="text" name="pdept" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">病区</label> <div class="layui-input-inline"><input type="text" name="pbeddept" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">床号</label> <div class="layui-input-inline"><input type="text" name="pbedid" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div> <hr></div> <div id="x1"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">医疗付款方式</label> <div class="layui-input-inline"><input type="text" name="p1" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">第</label> <div class="layui-input-inline"><input type="text" name="p2" readonly="readonly" autocomplete="off" class="layui-input"></div> <label class="layui-form-label">次住院</label></div> <div class="layui-inline"><label class="layui-form-label">病案号</label> <div class="layui-input-inline"><input type="text" name="p3" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div> <hr></div> <div id="x2"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">姓名</label> <div class="layui-input-inline"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">性别</label> <div class="layui-input-inline"><input type="text" name="p5" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">出生年月</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">年龄</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">婚姻</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div id="x3"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">(年龄不足一周岁的)年龄</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div> <label class="layui-form-label">月</label></div> <div class="layui-inline"><label class="layui-form-label">新生儿出生体重</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div> <label class="layui-form-label">克</label></div> <div class="layui-inline"><label class="layui-form-label">新生儿入院体重</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div> <label class="layui-form-label">克</label></div> <div class="layui-inline"><label class="layui-form-label">职业</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div id="x4"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">出生地</label> <div class="layui-input-inline" style="width: 5rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input" style="width: 5rem;"></div> <label class="layui-form-label">省</label> <div class="layui-input-inline" style="width: 7rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input" style="width: 7rem;"></div> <label class="layui-form-label">市</label> <div class="layui-input-inline" style="width: 14.375rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input" style="width: 14.375rem;"></div> <label class="layui-form-label">县</label></div> <div class="layui-inline"><label class="layui-form-label">民族</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">国籍</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">身份证</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div id="x5"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">籍贯</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div> <label class="layui-form-label">省</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div> <label class="layui-form-label">市</label></div> <div class="layui-inline"><label class="layui-form-label">工作单位及地址</label> <div class="layui-input-inline" style="width: 14rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input" style="width: 14rem;"></div></div> <div class="layui-inline"><label class="layui-form-label">电话</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">邮政编码</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div id="x6"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">现住址</label> <div class="layui-input-inline" style="width: 5rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input" style="width: 5rem;"></div> <label class="layui-form-label">省</label> <div class="layui-input-inline" style="width: 7rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input" style="width: 7rem;"></div> <label class="layui-form-label">市</label> <div class="layui-input-inline" style="width: 14.375rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input" style="width: 14.375rem;"></div> <label class="layui-form-label">县</label> <div class="layui-input-inline" style="width: 16rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input" style="width: 16rem;"></div></div> <div class="layui-inline"><label class="layui-form-label">电话</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">邮政编码</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div id="x7"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">户口住址</label> <div class="layui-input-inline" style="width: 5rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input" style="width: 5rem;"></div> <label class="layui-form-label">省</label> <div class="layui-input-inline" style="width: 7rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input" style="width: 7rem;"></div> <label class="layui-form-label">市</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input" style="width: 15rem;"></div> <label class="layui-form-label">县</label> <div class="layui-input-inline" style="width: 32rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input" style="width: 32rem;"></div></div> <div class="layui-inline"><label class="layui-form-label">邮政编码</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div id="x8"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">联系人</label> <div class="layui-input-inline"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">关系</label> <div class="layui-input-inline"><input type="text" name="p5" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">地址</label> <div class="layui-input-inline" style="width: 34rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">联系电话</label> <div class="layui-input-inline"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div id="x9"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">入院日期</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">入院科别</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p5" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">病室</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">转科科别</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div id="x10"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">出院日期</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">出院科别</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p5" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">病室</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">实际住院</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div> <label class="layui-form-label">天</label></div></div></div> <div id="x11"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">门(急)诊诊断</label> <div class="layui-input-inline" style="width: 40rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">入院方式</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p5" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">入院时情况</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline" style="float: right; margin-right: 2.9rem;"><label class="layui-form-label">入院后确诊</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p6" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div> <hr></div> <table style="width: 100%; text-align: center;"><tbody><tr><th rowspan="2" width="30%">出院诊断</th> <th colspan="5" width="50%">病情状况</th> <th rowspan="2" width="10%">ICD-10</th> <th rowspan="2" width="10%">入院病情</th></tr> <tr><th>1.治愈</th> <th>2.好转</th> <th>3.未愈</th> <th>4.死亡</th> <th>5.其他</th></tr> <tr id="t1"><td id="zd1td1">肾性贫血</td> <td id="zd1td2"></td> <td id="zd1td3"></td> <td id="zd1td4"></td> <td id="zd1td5"></td> <td id="zd1td6">√</td> <td id="zd1td7">D64.900x005</td> <td id="zd1td8">有</td></tr> <tr id="t2"><td id="zd2td1">肾结石</td> <td id="zd2td2"></td> <td id="zd2td3"></td> <td id="zd2td4"></td> <td id="zd2td5"></td> <td id="zd2td6">√</td> <td id="zd2td7">N20.000</td> <td id="zd2td8">有</td></tr> <tr id="t3"><td id="zd3td1">高脂血症</td> <td id="zd3td2"></td> <td id="zd3td3"></td> <td id="zd3td4"></td> <td id="zd3td5"></td> <td id="zd3td6">√</td> <td id="zd3td7">E78.500</td> <td id="zd3td8">有</td></tr> <tr id="t4"><td id="zd4td1">肝血管瘤</td> <td id="zd4td2"></td> <td id="zd4td3"></td> <td id="zd4td4"></td> <td id="zd4td5"></td> <td id="zd4td6">√</td> <td id="zd4td7">D18.013</td> <td id="zd4td8">有</td></tr> <tr id="t5"><td id="zd5td1">前列腺钙化灶</td> <td id="zd5td2"></td> <td id="zd5td3"></td> <td id="zd5td4"></td> <td id="zd5td5"></td> <td id="zd5td6">√</td> <td id="zd5td7">R93.802</td> <td id="zd5td8">有</td></tr> <tr id="t6"><td id="zd6td1">肿瘤标记物升高</td> <td id="zd6td2"></td> <td id="zd6td3"></td> <td id="zd6td4"></td> <td id="zd6td5"></td> <td id="zd6td6">√</td> <td id="zd6td7">R77.800x006</td> <td id="zd6td8">有</td></tr> <tr id="t7"><td id="zd7td1">高血压性心脏病</td> <td id="zd7td2"></td> <td id="zd7td3"></td> <td id="zd7td4"></td> <td id="zd7td5"></td> <td id="zd7td6">√</td> <td id="zd7td7">I11.901</td> <td id="zd7td8">有</td></tr> <tr id="t8"><td id="zd8td1">甲状腺结节</td> <td id="zd8td2"></td> <td id="zd8td3"></td> <td id="zd8td4"></td> <td id="zd8td5"></td> <td id="zd8td6">√</td> <td id="zd8td7">E04.101</td> <td id="zd8td8">有</td></tr> <tr id="t9"><td id="zd9td1">颈动脉硬化伴多发斑块形成</td> <td id="zd9td2"></td> <td id="zd9td3"></td> <td id="zd9td4"></td> <td id="zd9td5"></td> <td id="zd9td6">√</td> <td id="zd9td7">I70.8061</td> <td id="zd9td8">有</td></tr> <tr id="t10"><td id="zd10td1">多囊肾</td> <td id="zd10td2"></td> <td id="zd10td3"></td> <td id="zd10td4"></td> <td id="zd10td5"></td> <td id="zd10td6"></td> <td id="zd10td7"></td> <td id="zd10td8"></td></tr></tbody></table> <hr> <div id="x12"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label" style="display: none;">医院感染名称</label> <div class="layui-input-inline" style="width: 80rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input" style="display: none;"></div></div></div></div> <div id="x13"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">病理诊断</label> <div class="layui-input-inline" style="width: 67rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">病理号</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p5" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div id="x14"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">损伤、中毒的外部原因</label> <div class="layui-input-inline" style="width: 80rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div id="x15"><div class="layui-form-item"><div class="layui-inline" style="width: 45rem; margin-right: 5rem;"><label class="layui-form-label" style="top: 1.42rem;">药物过敏</label> <div class="layui-input-inline"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input" style="margin-bottom: 0.25rem;"> <input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input" style="width: 33rem;"></div> <label class="layui-form-label" style="color: red; position: absolute; bottom: 0px; right: 0px;">(有过敏史)</label></div> <div class="layui-inline"><label class="layui-form-label">HBsAg</label> <div class="layui-input-inline" style="width: 8rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">HCV-Ab</label> <div class="layui-input-inline" style="width: 8rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">HIV-Ab</label> <div class="layui-input-inline" style="width: 8rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div id="x16"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">科主任</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">主(副主)任医师</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">主治医师</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">住院医师</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div id="x17"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">进修医师</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">责任护士</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">实习医师</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">编码员</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div id="x18"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">病案质量</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">质控医师</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">质控护士</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div> <div class="layui-inline"><label class="layui-form-label">日期</label> <div class="layui-input-inline" style="width: 15rem;"><input type="text" name="p4" readonly="readonly" autocomplete="off" class="layui-input"></div></div></div></div> <div style="height: 3rem;"></div><hr></div>
+		<script>
+			var _url = g_url;
+			 new Vue({
+				el: '#app', //用于挂载要管理的元素
+				data: { //定义数据
+					message: 'ddddd',
+					data1:[],
+				},
+			async created() {//html渲染前加载(因为是纯html的，所以在这个查询数据并返回数据
+					var params = {};
+					//alert(location.search);//数据为?mrn=12323&series=12
+					console.log('ddddd');
+					location.search.substr(1).split('&').forEach(function (item) {
+						var s = item.split('=');
+						params[s[0]] = s[1];
+					});
+					localStorage.setItem('mrn', params.mrn);
+					localStorage.setItem('series', params.series);
+				  await this.getList();
+					console.log(this.data1);
+					console.log('赋值！');
+                  await  this.tdfz();
+				},
+				mounted()  {//html渲染后初始化加载
+
+				},
+				methods:{
+				 async  getList(){
+					 this.data1=[];
+					 var ddd=[];
+					 axios.defaults.timeout = -1;
+					 axios.defaults.baseURL ="";
+					   console.log(_url);
+					 await  axios({
+						   url: _url,
+						   method: 'POST',
+						   data: {
+						   	'MRN':localStorage.getItem("mrn"),
+							'SERIES':localStorage.getItem("series"),
+						   }
+					   }).then(function (response) {
+					   	console.log(response);
+						 console.log(response.data[0]);
+						 ddd = response.data[0];
+					   }) .catch(function (error) { // 请求失败处理
+								   console.log("错误=》"+error);
+							   });
+					 console.log(ddd);
+					 this.data1=ddd;
+					 console.log(this.data1);
+				   },
+					 tdfz(){
+                        //诊断列表
+						//第一行
+						{
+							zd1td1.innerText=this.data1.P325; //出院诊断
+							if(this.data1.P326=="治愈"){
+								zd1td2.innerText="√";
+							}
+							if(this.data1.P326=="好转"){
+								zd1td3.innerText="√";
+							}
+							if(this.data1.P326=="未愈"){
+								zd1td4.innerText="√";
+							}
+							if(this.data1.P326=="死亡"){
+								zd1td5.innerText="√";
+							}
+							if(this.data1.P326=="其他"){
+								zd1td6.innerText="√";
+							}
+							zd1td7.innerText=this.data1.P324;//ICD-10
+							zd1td8.innerText=this.data1.P806;//入院病情
+						}
+						//第二行
+						{
+							zd2td1.innerText=this.data1.P328;//出院诊断
+							if(this.data1.P329=="治愈"){
+								zd2td2.innerText="√";
+							}
+							if(this.data1.P329=="好转"){
+								zd2td3.innerText="√";
+							}
+							if(this.data1.P329=="未愈"){
+								zd2td4.innerText="√";
+							}
+							if(this.data1.P329=="死亡"){
+								zd2td5.innerText="√";
+							}
+							if(this.data1.P329=="其他"){
+								zd2td6.innerText="√";
+							}
+							zd2td7.innerText=this.data1.P327;//ICD-10
+							zd2td8.innerText=this.data1.P807;//入院病情
+						}
+						//第三行
+						{
+							zd3td1.innerText=this.data1.P3292;//出院诊断
+							if(this.data1.P3293=="治愈"){
+								zd3td2.innerText="√";
+							}
+							if(this.data1.P3293=="好转"){
+								zd3td3.innerText="√";
+							}
+							if(this.data1.P3293=="未愈"){
+								zd3td4.innerText="√";
+							}
+							if(this.data1.P3293=="死亡"){
+								zd3td5.innerText="√";
+							}
+							if(this.data1.P3293=="其他"){
+								zd3td6.innerText="√";
+							}
+							zd3td7.innerText=this.data1.P3291;//ICD-10
+							zd3td8.innerText=this.data1.P808;//入院病情
+						}
+						//第四行
+						{
+							zd4td1.innerText=this.data1.P3295;//出院诊断
+							if(this.data1.P3296=="治愈"){
+								zd4td2.innerText="√";
+							}
+							if(this.data1.P3296=="好转"){
+								zd4td3.innerText="√";
+							}
+							if(this.data1.P3296=="未愈"){
+								zd4td4.innerText="√";
+							}
+							if(this.data1.P3296=="死亡"){
+								zd4td5.innerText="√";
+							}
+							if(this.data1.P3296=="其他"){
+								zd4td6.innerText="√";
+							}
+							zd4td7.innerText=this.data1.P3294;//ICD-10
+							zd4td8.innerText=this.data1.P809;//入院病情
+						}
+						//第五行
+						{
+							zd5td1.innerText=this.data1.P3298;//出院诊断
+							if(this.data1.P3299=="治愈"){
+								zd5td2.innerText="√";
+							}
+							if(this.data1.P3299=="好转"){
+								zd5td3.innerText="√";
+							}
+							if(this.data1.P3299=="未愈"){
+								zd5td4.innerText="√";
+							}
+							if(this.data1.P3299=="死亡"){
+								zd5td5.innerText="√";
+							}
+							if(this.data1.P3299=="其他"){
+								zd5td6.innerText="√";
+							}
+							zd5td7.innerText=this.data1.P3297;//ICD-10
+							zd5td8.innerText=this.data1.P810;//入院病情
+						}
+						//第六行
+						{
+							zd6td1.innerText=this.data1.P3282;//出院诊断
+							if(this.data1.P3283=="治愈"){
+								zd6td2.innerText="√";
+							}
+							if(this.data1.P3283=="好转"){
+								zd6td3.innerText="√";
+							}
+							if(this.data1.P3283=="未愈"){
+								zd6td4.innerText="√";
+							}
+							if(this.data1.P3283=="死亡"){
+								zd6td5.innerText="√";
+							}
+							if(this.data1.P3283=="其他"){
+								zd6td6.innerText="√";
+							}
+							zd6td7.innerText=this.data1.P3281;//ICD-10
+							zd6td8.innerText=this.data1.P811;//入院病情
+						}
+						//第七行
+						{
+							zd7td1.innerText=this.data1.P3285;//出院诊断
+							if(this.data1.P3286=="治愈"){
+								zd7td2.innerText="√";
+							}
+							if(this.data1.P3286=="好转"){
+								zd7td3.innerText="√";
+							}
+							if(this.data1.P3286=="未愈"){
+								zd7td4.innerText="√";
+							}
+							if(this.data1.P3286=="死亡"){
+								zd7td5.innerText="√";
+							}
+							if(this.data1.P3286=="其他"){
+								zd7td6.innerText="√";
+							}
+							zd7td7.innerText=this.data1.P3284;//ICD-10
+							zd7td8.innerText=this.data1.P812;//入院病情
+						}
+						//第八行
+						{
+							zd8td1.innerText=this.data1.P3288;//出院诊断
+							if(this.data1.P3289=="治愈"){
+								zd8td2.innerText="√";
+							}
+							if(this.data1.P3289=="好转"){
+								zd8td3.innerText="√";
+							}
+							if(this.data1.P3289=="未愈"){
+								zd8td4.innerText="√";
+							}
+							if(this.data1.P3289=="死亡"){
+								zd8td5.innerText="√";
+							}
+							if(this.data1.P3289=="其他"){
+								zd8td6.innerText="√";
+							}
+							zd8td7.innerText=this.data1.P3287;//ICD-10
+							zd8td8.innerText=this.data1.P813;//入院病情
+						}
+						//第九行
+						{
+							zd9td1.innerText=this.data1.P3272;//出院诊断
+							if(this.data1.P3273=="治愈"){
+								zd9td2.innerText="√";
+							}
+							if(this.data1.P3273=="好转"){
+								zd9td3.innerText="√";
+							}
+							if(this.data1.P3273=="未愈"){
+								zd9td4.innerText="√";
+							}
+							if(this.data1.P3273=="死亡"){
+								zd9td5.innerText="√";
+							}
+							if(this.data1.P3273=="其他"){
+								zd9td6.innerText="√";
+							}
+							zd9td7.innerText=this.data1.P3271;//ICD-10
+							zd9td8.innerText=this.data1.P814;//入院病情
+						}
+						//第十行
+						{
+							zd10td1.innerText=this.data1.P3275;//出院诊断
+							if(this.data1.P3276=="治愈"){
+								zd10td2.innerText="√";
+							}
+							if(this.data1.P3276=="好转"){
+								zd10td3.innerText="√";
+							}
+							if(this.data1.P3276=="未愈"){
+								zd10td4.innerText="√";
+							}
+							if(this.data1.P3276=="死亡"){
+								zd10td5.innerText="√";
+							}
+							if(this.data1.P3276=="其他"){
+								zd10d6.innerText="√";
+							}
+							zd10td7.innerText=this.data1.P3274;//ICD-10
+							zd10td8.innerText=this.data1.P815;//入院病情
+						}
+					},
+					zhenmian(){
+				 	   console.log('么');
+				 	   var str1="IpfFirstFront.html?mrn="+localStorage.getItem("mrn")+"&series="+localStorage.getItem("series");
+				 	   console.log(str1);
+						window.location.href="IpfFirstFront.html?mrn="+localStorage.getItem("mrn")+"&series="+localStorage.getItem("series");
+					},
+					beimian(){
+						console.log('么');
+						var str1="IpfFirstFront.html?mrn="+localStorage.getItem("mrn")+"&series="+localStorage.getItem("series");
+						console.log(str1);
+						window.location.href="IpfSecondFront.html?mrn="+localStorage.getItem("mrn")+"&series="+localStorage.getItem("series");
+					}
+				},
+				
+				 
+			})
+		</script>
+			
+		
+
+</body></html>

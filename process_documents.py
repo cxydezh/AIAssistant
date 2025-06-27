@@ -200,7 +200,7 @@ def process_patient_records(folder_path):
 if __name__ == "__main__":
     # 重要提示: 请将此路径替换为您的文件夹的实际路径。
     # 在Windows上建议使用原始字符串(r"...")以避免反斜杠问题。
-    patient_folder = r"D:\cxy\AI辅助示例数据\6442477_陈某某_3"
+    patient_folder = r"C:\Users\Helianthus\Desktop\AI辅助示例数据\11784_林某_125"
     
     if not os.path.isdir(patient_folder):
         print(f"错误: 指定的文件夹不存在: {patient_folder}")
