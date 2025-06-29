@@ -39,8 +39,8 @@ async def extract_discharge_records():
 
         # 获取所有相关条目
         items = await page.eval_on_selector_all(
-            '.el-menu-item, .record-list .item, .list-item, span, div',
-            'els => els.filter(e => e.innerText && (e.innerText.includes("出院") || e.innerText.includes("记录") || e.innerText.includes("知情") || e.innerText.includes("谈话") || e.innerText.includes("病程") || e.innerText.includes("入院"))).map(e => e.innerText.trim())'
+            'table,.type-list,.emr-left',
+            'els => els.filter(e => e.innerText && (e.innerText.includes("出院") || e.innerText.includes("记录") || e.innerText.includes("知情") || e.innerText.includes("谈话") || e.innerText.includes("病程") || e.innerText.includes("入院"))).map(e => "元素id：" + e.id + String.fromCharCode(10) +"元素class：" + e.className + String.fromCharCode(10) + "元素文本：" + e.innerText.trim())'
         )
         # 输出调试用条目
         with open(debug_path, 'w', encoding='utf-8') as f:
